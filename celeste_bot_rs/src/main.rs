@@ -247,20 +247,26 @@ async fn main() {
 use celeste_save_data_rs::save_data::SaveData;
 
 async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
-    match msg.attachments.get(0) {
-        None => Err("no attachments".to_string()),
-        Some(attachment) => {
-            match attachment.download().await {
-                Err(why) => {
-                    Err(format!("download error {:?}", why))
-                }
-                Ok(data) => {
-                    let xml = String::from_utf8(data).map_err(|e| format!("from_utf8 error {:?}", e))?;
-                    SaveData::from_str(&xml)
+    let mut save_data = None;
+    for attachment in msg.attachments.iter() {
+        match attachment.download().await {
+            Err(why) => {
+                Err(format!("download error {:?}", why))?
+            }
+            Ok(data) => {
+                let xml = String::from_utf8(data).map_err(|e| format!("from_utf8 error {:?}", e))?;
+                let now_data = SaveData::from_str(&xml)?;
+                save_data = match save_data {
+                    None => Some(now_data),
+                    Some(mut data) => {
+                        data.merge(now_data);
+                        Some(data)
+                    }
                 }
             }
         }
     }
+    save_data.ok_or_else(|| "no attachments".to_string())
 }
 use serenity::utils::{Colour, MessageBuilder};
 
@@ -273,11 +279,11 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
         Ok(save_data) => {
             let mut table = Vec::new();
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
-            table.push(vec!["Chapter".to_string(), "TotalStrawberries".to_string()]);
+            table.push(vec!["Chapter".to_string(), "BestDeaths".to_string()]);
             let sides = vec!["A", "B", "C"];
-            for map in save_data.map_stats.iter() {
-                if map.level == "Celeste" {
-                    table.push(vec![format!("{}-{}", map.sid, sides[map.side]), map.stats.total_strawberries.to_string()]);
+            for (code, stats) in save_data.map_stats.iter() {
+                if code.level == "Celeste" {
+                    table.push(vec![format!("{}-{}", code.sid, sides[code.side]), stats.best_deaths.to_string()]);
                 }
             }
             let mut out = std::fs::File::create("data.txt").unwrap();

@@ -13,7 +13,8 @@ pub struct SaveData {
     pub total_wall_jumps: u64,
     pub total_dashes: u64,
     pub last_area: LastArea,
-    pub areas: Areas
+    pub areas: Areas,
+    pub level_sets: LevelSets,
 }
 
 #[derive(Deserialize, Debug)]
@@ -26,6 +27,7 @@ pub struct LastArea {
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
 pub struct Areas {
+    #[serde(default)]
     pub area_stats: Vec<AreaStats>,
 }
 
@@ -72,3 +74,16 @@ pub struct AreaModeStats {
 
 #[derive(Deserialize, Debug)]
 pub struct Time(u64);
+
+#[derive(Deserialize, Debug)]
+#[serde(rename_all="PascalCase")]
+pub struct LevelSets {
+    #[serde(default)]
+    pub level_set_stats: Vec<LevelSetStats>,
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(rename_all="PascalCase")]
+pub struct LevelSetStats {
+    pub areas: Areas,
+}

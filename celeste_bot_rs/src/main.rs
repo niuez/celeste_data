@@ -244,7 +244,6 @@ async fn main() {
     }
 }
 
-use celeste_save_data_rs::load_save_data;
 use celeste_save_data_rs::save_data::SaveData;
 
 async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
@@ -257,7 +256,7 @@ async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
                 }
                 Ok(data) => {
                     let xml = String::from_utf8(data).map_err(|e| format!("from_utf8 error {:?}", e))?;
-                    load_save_data(&xml)
+                    SaveData::from_str(&xml)
                 }
             }
         }
@@ -276,9 +275,9 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
             table.push(vec!["Chapter".to_string(), "TotalStrawberries".to_string()]);
             let sides = vec!["A", "B", "C"];
-            for area_stats in save_data.areas.area_stats.iter() {
-                for (i, area_mode_stats)  in area_stats.modes.area_mode_stats.iter().enumerate() {
-                    table.push(vec![format!("{}-{}", area_stats.sid, sides[i]), area_mode_stats.total_strawberries.to_string()]);
+            for map in save_data.map_stats.iter() {
+                if map.level == "Celeste" {
+                    table.push(vec![format!("{}-{}", map.sid, sides[map.side]), map.stats.total_strawberries.to_string()]);
                 }
             }
             let mut out = std::fs::File::create("data.txt").unwrap();

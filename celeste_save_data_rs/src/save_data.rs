@@ -1,4 +1,5 @@
 use serde::{ Deserialize };
+use quick_xml::de::from_str;
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
@@ -13,9 +14,55 @@ pub struct SaveData {
     pub total_wall_jumps: u64,
     pub total_dashes: u64,
     pub last_area: LastArea,
-    pub areas: Areas,
-    pub level_sets: LevelSets,
+    areas: Areas,
+    level_sets: LevelSets,
+    #[serde(skip)]
+    pub map_stats: Vec<MapStats>
 }
+
+impl SaveData {
+    fn build_map_stats(&mut self) {
+        self.map_stats.clear();
+        for area in self.areas.area_stats.iter() {
+            for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
+                self.map_stats.push(MapStats {
+                    level: "Celeste".to_string(),
+                    sid: area.sid.clone(),
+                    side: i,
+                    stats: mode.clone(),
+                });
+            }
+        }
+        for level in self.level_sets.level_set_stats.iter() {
+            for area in level.areas.area_stats.iter() {
+                for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
+                    self.map_stats.push(MapStats {
+                        level: level.name.clone(),
+                        sid: area.sid.clone(),
+                        side: i,
+                        stats: mode.clone(),
+                    });
+                }
+            }
+        }
+    }
+    pub fn from_str(xml_string: &str) -> Result<SaveData, String> {
+        let mut data: SaveData = from_str(xml_string).map_err(|e| format!("cannot load save data, \"{:?}\"", e))?;
+        data.build_map_stats();
+        Ok(data)
+    }
+}
+
+#[derive(Debug)]
+pub struct MapStats {
+    pub level: String,
+    pub sid: String,
+    pub side: usize,
+    pub stats: AreaModeStats,
+}
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct Time(u64);
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
@@ -26,26 +73,26 @@ pub struct LastArea {
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
-pub struct Areas {
+struct Areas {
     #[serde(default)]
-    pub area_stats: Vec<AreaStats>,
+    area_stats: Vec<AreaStats>,
 }
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
-pub struct AreaStats {
+struct AreaStats {
     #[serde(rename="@Cassette")]
-    pub casette: bool,
+    casette: bool,
     #[serde(rename="@SID")]
-    pub sid: String,
-    pub modes: Modes
+    sid: String,
+    modes: Modes
 }
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
-pub struct Modes {
-    pub area_mode_stats: Vec<AreaModeStats>
+struct Modes {
+    area_mode_stats: Vec<AreaModeStats>
 }
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all="PascalCase")]
 pub struct AreaModeStats {
     #[serde(rename="@TotalStrawberries")]
@@ -72,18 +119,18 @@ pub struct AreaModeStats {
     pub heart_gem: bool,
 }
 
-#[derive(Deserialize, Debug)]
-pub struct Time(u64);
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
-pub struct LevelSets {
+struct LevelSets {
     #[serde(default)]
-    pub level_set_stats: Vec<LevelSetStats>,
+    level_set_stats: Vec<LevelSetStats>,
 }
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all="PascalCase")]
-pub struct LevelSetStats {
-    pub areas: Areas,
+struct LevelSetStats {
+    #[serde(rename="@Name")]
+    name: String,
+    areas: Areas,
 }

@@ -113,16 +113,22 @@ pub struct AreaModeStats {
 impl AreaModeStats {
     fn merge(&mut self, right: Self) {
         //self.total_strawberries += right.total_strawberries;
-        self.completed |= right.completed;
-        self.single_run_completed |= right.single_run_completed;
-        self.full_clear |= right.full_clear;
+        self.heart_gem |= right.heart_gem;
         self.deaths += right.deaths;
         self.time_played += right.time_played;
-        self.best_time = std::cmp::min(self.best_time, right.best_time);
-        self.best_full_clear_time = std::cmp::min(self.best_full_clear_time, right.best_full_clear_time);
-        self.best_dashes = std::cmp::min(self.best_dashes, right.best_dashes);
-        self.best_deaths = std::cmp::min(self.best_deaths, right.best_deaths);
-        self.heart_gem |= right.heart_gem;
+        if !self.completed {
+            *self = right
+        }
+
+        else if right.completed {
+            self.completed |= right.completed;
+            self.single_run_completed |= right.single_run_completed;
+            self.full_clear |= right.full_clear;
+            self.best_time = std::cmp::min(self.best_time, right.best_time);
+            self.best_full_clear_time = std::cmp::min(self.best_full_clear_time, right.best_full_clear_time);
+            self.best_dashes = std::cmp::min(self.best_dashes, right.best_dashes);
+            self.best_deaths = std::cmp::min(self.best_deaths, right.best_deaths);
+        }
     }
 }
 

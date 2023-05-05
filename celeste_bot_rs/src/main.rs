@@ -140,6 +140,16 @@ fn _dispatch_error_no_macro<'fut>(
 #[commands(about)]
 struct General;
 
+
+use celeste_save_data_rs::save_data::SaveData;
+use celeste_save_data_rs::map_data::GameData;
+
+struct GameDataStore;
+
+impl TypeMapKey for GameDataStore {
+    type Value = Arc<RwLock<GameData>>;
+}
+
 #[tokio::main]
 async fn main() {
     // Configure the client with your Discord bot token in the environment.
@@ -236,7 +246,9 @@ async fn main() {
 
     {
         let mut data = client.data.write().await;
-        data.insert::<ShardManagerContainer>(Arc::clone(&client.shard_manager));
+        let yml = std::fs::read_to_string("../maps.yaml").unwrap();
+        let game_data = GameData::from_str(&yml).unwrap();
+        data.insert::<GameDataStore>(Arc::new(RwLock::new(game_data)));
     }
 
     if let Err(why) = client.start().await {
@@ -244,7 +256,6 @@ async fn main() {
     }
 }
 
-use celeste_save_data_rs::save_data::SaveData;
 
 async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
     let mut save_data = None;
@@ -281,9 +292,16 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
             table.push(vec!["Chapter".to_string(), "BestDeaths".to_string()]);
             let sides = vec!["A", "B", "C"];
-            for (code, stats) in save_data.map_stats.iter() {
-                if code.level == "Celeste" {
-                    table.push(vec![format!("{}-{}", code.sid, sides[code.side]), stats.best_deaths.to_string()]);
+            {
+                let data_read = ctx.data.read().await;
+                let game_data_lock = data_read.get::<GameDataStore>()
+                    .expect("Expect GameDataStore in TypeMap").clone();
+                let game_data = game_data_lock.read().await;
+                for map_data in game_data.get_level_data("Celeste").unwrap().maps() {
+                    table.push(vec![
+                               format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
+                               save_data.map_stats.get(&map_data.code).map(|d| d.best_deaths.to_string()).unwrap_or("x".to_string()),
+                    ]);
                 }
             }
             let mut out = std::fs::File::create("data.txt").unwrap();

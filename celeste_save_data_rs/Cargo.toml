@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 quick-xml = { version="0.28.2", features=["serialize"] }
 serde = { version="1.0.160", features = [ "derive" ] }
+serde_yaml = "0.9"

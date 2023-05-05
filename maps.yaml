@@ -1,0 +1,55 @@
+- level: 'Celeste'
+  maps:
+    - sid: 'Celeste/1-ForsakenCity'
+      name:
+        en: 'Forsaken City'
+        ja: 'ゴーストタウン'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/2-OldSite'
+      name:
+        en: 'Old Site'
+        ja: '遺跡'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/3-CelestialResort'
+      name:
+        en: 'Celestial Resort'
+        ja: 'セレステホテル'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/4-GoldenRidge'
+      name:
+        en: 'Golden Ridge'
+        ja: 'こんじき山稜'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/5-MirrorTemple'
+      name:
+        en: 'Mirror Temple'
+        ja: '鏡の神殿'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/6-Reflection'
+      name:
+        en: 'Reflection'
+        ja: 'もう一人の自分'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/7-Summit'
+      name:
+        en: 'Summit'
+        ja: '頂'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/9-Core'
+      name:
+        en: 'Core'
+        ja: '核'
+      sides: [0, 1, 2]
+
+    - sid: 'Celeste/LostLevels'
+      name:
+        en: 'Farewell'
+        ja: '別れ'
+      sides: [0]

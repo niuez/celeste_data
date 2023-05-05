@@ -29,6 +29,7 @@ use serenity::framework::standard::{
     StandardFramework,
 };
 use serenity::http::Http;
+use serenity::model::application::interaction::InteractionResponseType;
 use serenity::model::channel::{Channel, Message};
 use serenity::model::gateway::{GatewayIntents, Ready};
 use serenity::model::id::UserId;
@@ -279,7 +280,6 @@ async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
     }
     save_data.ok_or_else(|| "no attachments".to_string())
 }
-use serenity::utils::{Colour, MessageBuilder};
 
 #[command]
 async fn about(ctx: &Context, msg: &Message) -> CommandResult {
@@ -292,12 +292,49 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
             table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string()]);
             let sides = vec!["A", "B", "C"];
+            let m = {
+                let levels = {
+                    let data_read = ctx.data.read().await;
+                    let game_data_lock = data_read.get::<GameDataStore>()
+                        .expect("Expect GameDataStore in TypeMap").clone();
+                    let game_data = game_data_lock.read().await;
+                    game_data.levels().map(|s| s.to_string()).collect::<Vec<_>>()
+                };
+
+                msg.channel_id.send_message(&ctx, |m| {
+                    m.content("select").components(|c| {
+                        c.create_action_row(|row| {
+                            row.create_select_menu(|menu| {
+                                menu.custom_id("level_select");
+                                menu.placeholder("no level selected");
+                                menu.options(|f| {
+                                    for level in levels.into_iter() {
+                                        f.create_option(|o| o.label(level.to_string()).value(level.to_string()));
+                                    }
+                                    f
+                                })
+                            })
+                        })
+                    })
+                })
+            };
+            let m = m.await.unwrap();
+            let interaction =
+                match m.await_component_interaction(&ctx).timeout(std::time::Duration::from_secs(30)).await {
+                Some(x) => x,
+                None => {
+                    m.reply(&ctx, "Timed out").await.unwrap();
+                    return Ok(());
+                },
+            };
+            let selected_level = &interaction.data.values[0];
             {
                 let data_read = ctx.data.read().await;
                 let game_data_lock = data_read.get::<GameDataStore>()
                     .expect("Expect GameDataStore in TypeMap").clone();
                 let game_data = game_data_lock.read().await;
-                for map_data in game_data.get_level_data("Celeste").unwrap().maps() {
+
+                for map_data in game_data.get_level_data(selected_level).unwrap().maps() {
                     let stats = save_data.map_stats.get(&map_data.code);
                     table.push(vec![
                                format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
@@ -306,12 +343,15 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                     ]);
                 }
             }
-            let mut out = std::fs::File::create("data.txt").unwrap();
-            text_tables::render(&mut out, &table).unwrap();
-            msg.channel_id.send_files(&ctx.http, vec!["data.txt"], |m| m.content("a file")).await?;
+            interaction.create_interaction_response(&ctx, |r| {
+                r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
+                    let mut out = std::fs::File::create("data.txt").unwrap();
+                    text_tables::render(&mut out, &table).unwrap();
+                    d.add_file("data.txt")
+                })
+            }).await?;
         }
     }
-
     Ok(())
 }
 

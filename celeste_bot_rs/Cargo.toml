@@ -10,7 +10,7 @@ text-tables = "0.3.1"
 
 [dependencies.serenity]
 version = "0.11.5"
-features = ["framework", "standard_framework", "rustls_backend"]
+features = ["framework", "standard_framework", "rustls_backend", "client", "gateway", "model", "collector"]
 
 [dependencies.tokio]
 version = "1.0"

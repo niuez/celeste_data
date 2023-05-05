@@ -3,6 +3,21 @@ use serde::Deserialize;
 #[derive(Deserialize, Debug, Clone, Copy)]
 pub struct Time(u64);
 
+fn div_rem(a: u64, b: u64) -> (u64, u64) {
+    (a / b, a % b)
+}
+
+impl std::fmt::Display for Time {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        let v = self.0 / 10000u64;
+        let (v, ms) = div_rem(v, 1000);
+        let (v, s) = div_rem(v, 60);
+        let (h, m) = div_rem(v, 60);
+        write!(f, "{}:{:02}:{:02}.{:03}", h, m, s, ms)?;
+        Ok(())
+    }
+}
+
 impl std::ops::Add for Time {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {

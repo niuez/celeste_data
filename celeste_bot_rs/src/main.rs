@@ -290,7 +290,7 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
         Ok(save_data) => {
             let mut table = Vec::new();
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
-            table.push(vec!["Chapter".to_string(), "BestDeaths".to_string()]);
+            table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string()]);
             let sides = vec!["A", "B", "C"];
             {
                 let data_read = ctx.data.read().await;
@@ -298,9 +298,11 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                     .expect("Expect GameDataStore in TypeMap").clone();
                 let game_data = game_data_lock.read().await;
                 for map_data in game_data.get_level_data("Celeste").unwrap().maps() {
+                    let stats = save_data.map_stats.get(&map_data.code);
                     table.push(vec![
                                format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
-                               save_data.map_stats.get(&map_data.code).map(|d| d.best_deaths.to_string()).unwrap_or("x".to_string()),
+                               stats.map(|d| format!("{}", d.best_time)).unwrap_or("-".to_string()),
+                               stats.map(|d| format!("{}/{}", d.best_deaths, d.deaths)).unwrap_or("-".to_string()),
                     ]);
                 }
             }

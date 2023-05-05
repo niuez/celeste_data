@@ -54,6 +54,119 @@
         ja: '別れ'
       sides: [0]
 
+- level: 'StrawberryJam2021/1-Beginner'
+  maps:
+    - sid: 'StrawberryJam2021/1-Beginner/asteriskblue'
+      name:
+        en: 'Forest Path'
+        ja: '森の小径'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Bing_Over_Google'
+      name:
+        en: 'If my 'driveway' almost did you in...'
+        ja: 'うちの前の道で死にかけたんなら・・・'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/cellularAutomaton'
+      name:
+        en: 'Azure Caverns'
+        ja: '紺碧の洞窟'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Ceph'
+      name:
+        en: 'Cassette Cliffs'
+        ja: 'カセット崖のぼり'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Circumplex'
+      name:
+        en: 'Soap'
+        ja: 'せっけん'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/coffe'
+      name:
+        en: 'Loopy Lagoon'
+        ja: 'カラフルドーナツの珊瑚'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/CoupCritik'
+      name:
+        en: 'Over the City'
+        ja: '都市の彼方に'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Eclipse'
+      name:
+        en: 'Troposphere'
+        ja: '成層圏'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Flagpole1up'
+      name:
+        en: 'Switchtube Vista'
+        ja: '反転土管からの眺め'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/frozenflygone'
+      name:
+        en: 'Potential for Anything'
+        ja: 'Potential for Anything'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/HankyMueller'
+      name:
+        en: 'A Gift From the Stars'
+        ja: 'お星さまからの贈り物'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/hyperlife'
+      name:
+        en: 'Collapsing Skyline'
+        ja: '崩れゆくスカイライン'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Jadeturtle'
+      name:
+        en: 'Strawberry Orchard'
+        ja: 'いちご農園'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Joltik'
+      name:
+        en: 'Midnight Spire'
+        ja: '真夜中の尖塔'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/mosscairn'
+      name:
+        en: 'paint'
+        ja: 'ペイント'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/NotYourBadeline'
+      name:
+        en: 'Seeing is Believing'
+        ja: '百聞は一見にしかず'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Owen-Shirrell'
+      name:
+        en: 'Dropzle'
+        ja: 'ドロップパズル'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Quinnigan'
+      name:
+        en: 'Rose Garden'
+        ja: 'バラ庭園'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Skeleton'
+      name:
+        en: 'Treehive'
+        ja: '大木とハチの巣'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/snas'
+      name:
+        en: 'The Squeeze'
+        ja: 'ジャストフィット'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/voliver9'
+      name:
+        en: 'Coresaken City'
+        ja: 'コアストタウン'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/ZZ-Heartside'
+      name:
+        en: 'Blueberry Bay'
+        ja: 'ブルーベリー湾'
+      sides: [0]
+
 - level: 'StrawberryJam2021/2-Intermediate'
   maps:
     - sid: 'StrawberryJam2021/2_Intermediate/arphimigon'
@@ -114,7 +227,7 @@
     - sid: 'StrawberryJam2021/2_Intermediate/Luma'
       name:
         en: 'Midnight Monsoon'
-        ja: '深夜のモンスーン'
+        ja: '真夜中のモンスーン'
       sides: [0]
     - sid: 'StrawberryJam2021/2_Intermediate/marlin'
       name:
@@ -146,7 +259,7 @@
         en: 'Pointless Machines'
         ja: 'むなしき機械'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/ZZ_Heartside'
+    - sid: 'StrawberryJam2021/2_Intermediate/ZZ-Heartside'
       name:
         en: 'Raspberry Roots'
         ja: 'ラズベリーの根'

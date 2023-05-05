@@ -375,7 +375,7 @@
     - sid: 'StrawberryJam2021/3-Advanced/Roborb'
       name:
         en: 'Belated Valentine\'s Day'
-        ja: ''
+        ja: '遅ればせながらバレンタインの日'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Vamp'
       name:

@@ -63,7 +63,7 @@
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/Bing_Over_Google'
       name:
-        en: 'If my \'driveway\' almost did you in...'
+        en: 'If my ''driveway'' almost did you in...'
         ja: 'うちの前の道で死にかけたんなら・・・'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/cellularAutomaton'
@@ -121,7 +121,7 @@
         en: 'Strawberry Orchard'
         ja: 'いちご農園'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Joltik'
+    - sid: 'StrawberryJam2021/1-Beginner/joltik'
       name:
         en: 'Midnight Spire'
         ja: '真夜中の尖塔'
@@ -146,7 +146,7 @@
         en: 'Rose Garden'
         ja: 'バラ庭園'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Skeleton'
+    - sid: 'StrawberryJam2021/1-Beginner/skeleton'
       name:
         en: 'Treehive'
         ja: '大木とハチの巣'
@@ -161,7 +161,7 @@
         en: 'Coresaken City'
         ja: 'コアストタウン'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/ZZ-Heartside'
+    - sid: 'StrawberryJam2021/1-Beginner/ZZ-HeartSide'
       name:
         en: 'Blueberry Bay'
         ja: 'ブルーベリー湾'
@@ -169,7 +169,7 @@
 
 - level: 'StrawberryJam2021/2-Intermediate'
   maps:
-    - sid: 'StrawberryJam2021/2-Intermediate/arphimigon'
+    - sid: 'StrawberryJam2021/2-Intermediate/Arphimigon'
       name:
         en: 'Sleeping Under Stars'
         ja: '星空の下でおやすみ'
@@ -214,7 +214,7 @@
         en: 'In Filtration'
         ja: '潜入作戦'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/Legs'
+    - sid: 'StrawberryJam2021/2-Intermediate/LegS'
       name:
         en: 'Supernautica'
         ja: 'スーパーノーティカ'
@@ -259,7 +259,7 @@
         en: 'Pointless Machines'
         ja: 'むなしき機械'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/ZZ-Heartside'
+    - sid: 'StrawberryJam2021/2-Intermediate/ZZ-HeartSide'
       name:
         en: 'Raspberry Roots'
         ja: 'ラズベリーの根'
@@ -362,19 +362,19 @@
         en: 'Thinking with Portals'
         ja: 'ポータルを使って考えましょう'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/TilitTheStars'
+    - sid: 'StrawberryJam2021/3-Advanced/TiltTheStars'
       name:
         en: 'Bee Berserk'
         ja: 'キラービー'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Tortoise'
       name:
-        en: 'Java\'s Crypt'
+        en: 'Java''s Crypt'
         ja: 'ジャバスクリプト'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Roborb'
       name:
-        en: 'Belated Valentine\'s Day'
+        en: 'Belated Valentine''s Day'
         ja: '遅ればせながらバレンタインの日'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Vamp'
@@ -392,9 +392,9 @@
         en: 'Raindrops on Roses'
         ja: 'バラの雫'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/ZZ-Heartside'
+    - sid: 'StrawberryJam2021/3-Advanced/ZZ-HeartSide'
       name:
         en: 'Mango Mesa'
-        ja: 'マンゴーメサ'
+        ja: 'マンゴー台地'
       sides: [0]
     

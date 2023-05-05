@@ -53,3 +53,101 @@
         en: 'Farewell'
         ja: '別れ'
       sides: [0]
+
+- level: 'StrawberryJam2021/2-Intermediate'
+  maps:
+    - sid: 'StrawberryJam2021/2_Intermediate/arphimigon'
+      name:
+        en: 'Sleeping Under Stars'
+        ja: '星空の下でおやすみ'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/bryse0n'
+      name:
+        en: 'Square the Circle'
+        ja: '円積問題'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Dooshii'
+      name:
+        en: 'Frosted Fragments'
+        ja: '霧枯れの断章'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Emik'
+      name:
+        en: 'Deep Blue'
+        ja: 'ディープブルー'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Evilleafy'
+      name:
+        en: 'Vertigo'
+        ja: 'めまい'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Ezel'
+      name:
+        en: 'EAT GIRL'
+        ja: 'EAT GIRL'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/GlowWoomii'
+      name:
+        en: 'Honeyzip Inc.'
+        ja: 'ハニージップ株式会社'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Ice'
+      name:
+        en: 'Temple of a Thousand Skies'
+        ja: '千の空をあれする神殿'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Jems'
+      name:
+        en: 'In Filtration'
+        ja: '潜入作戦'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Legs'
+      name:
+        en: 'Supernautica'
+        ja: 'スーパーノーティカ'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Liero'
+      name:
+        en: 'Fifth Dimension'
+        ja: '第五次元'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Luma'
+      name:
+        en: 'Midnight Monsoon'
+        ja: '深夜のモンスーン'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/marlin'
+      name:
+        en: 'Low-G Botany'
+        ja: '低重力植物学'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/pixelator'
+      name:
+        en: 'The Tower'
+        ja: 'The Tower'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/Rocketguy2'
+      name:
+        en: 'Pufferfish Transportation Co.'
+        ja: 'フグ運輸会社'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/SpoopySoup'
+      name:
+        en: 'Sea of Soup'
+        ja: 'スープの海'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/thebreadstick1'
+      name:
+        en: 'Construction Conundrum'
+        ja: '建設現場の不思議'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/vitellary'
+      name:
+        en: 'Pointless Machines'
+        ja: 'むなしき機械'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2_Intermediate/ZZ_Heartside'
+      name:
+        en: 'Raspberry Roots'
+        ja: 'ラズベリーの根'
+      sides: [0]

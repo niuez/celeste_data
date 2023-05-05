@@ -63,7 +63,7 @@
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/Bing_Over_Google'
       name:
-        en: 'If my 'driveway' almost did you in...'
+        en: 'If my \'driveway\' almost did you in...'
         ja: 'うちの前の道で死にかけたんなら・・・'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/cellularAutomaton'
@@ -169,98 +169,232 @@
 
 - level: 'StrawberryJam2021/2-Intermediate'
   maps:
-    - sid: 'StrawberryJam2021/2_Intermediate/arphimigon'
+    - sid: 'StrawberryJam2021/2-Intermediate/arphimigon'
       name:
         en: 'Sleeping Under Stars'
         ja: '星空の下でおやすみ'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/bryse0n'
+    - sid: 'StrawberryJam2021/2-Intermediate/bryse0n'
       name:
         en: 'Square the Circle'
         ja: '円積問題'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Dooshii'
+    - sid: 'StrawberryJam2021/2-Intermediate/Dooshii'
       name:
         en: 'Frosted Fragments'
         ja: '霧枯れの断章'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Emik'
+    - sid: 'StrawberryJam2021/2-Intermediate/Emik'
       name:
         en: 'Deep Blue'
         ja: 'ディープブルー'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Evilleafy'
+    - sid: 'StrawberryJam2021/2-Intermediate/Evilleafy'
       name:
         en: 'Vertigo'
         ja: 'めまい'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Ezel'
+    - sid: 'StrawberryJam2021/2-Intermediate/Ezel'
       name:
         en: 'EAT GIRL'
         ja: 'EAT GIRL'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/GlowWoomii'
+    - sid: 'StrawberryJam2021/2-Intermediate/GlowWoomii'
       name:
         en: 'Honeyzip Inc.'
         ja: 'ハニージップ株式会社'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Ice'
+    - sid: 'StrawberryJam2021/2-Intermediate/Ice'
       name:
         en: 'Temple of a Thousand Skies'
         ja: '千の空をあれする神殿'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Jems'
+    - sid: 'StrawberryJam2021/2-Intermediate/Jems'
       name:
         en: 'In Filtration'
         ja: '潜入作戦'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Legs'
+    - sid: 'StrawberryJam2021/2-Intermediate/Legs'
       name:
         en: 'Supernautica'
         ja: 'スーパーノーティカ'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Liero'
+    - sid: 'StrawberryJam2021/2-Intermediate/Liero'
       name:
         en: 'Fifth Dimension'
         ja: '第五次元'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Luma'
+    - sid: 'StrawberryJam2021/2-Intermediate/Luma'
       name:
         en: 'Midnight Monsoon'
         ja: '真夜中のモンスーン'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/marlin'
+    - sid: 'StrawberryJam2021/2-Intermediate/marlin'
       name:
         en: 'Low-G Botany'
         ja: '低重力植物学'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/pixelator'
+    - sid: 'StrawberryJam2021/2-Intermediate/pixelator'
       name:
         en: 'The Tower'
         ja: 'The Tower'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/Rocketguy2'
+    - sid: 'StrawberryJam2021/2-Intermediate/Rocketguy2'
       name:
         en: 'Pufferfish Transportation Co.'
         ja: 'フグ運輸会社'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/SpoopySoup'
+    - sid: 'StrawberryJam2021/2-Intermediate/SpoopySoup'
       name:
         en: 'Sea of Soup'
         ja: 'スープの海'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/thebreadstick1'
+    - sid: 'StrawberryJam2021/2-Intermediate/thebreadstick1'
       name:
         en: 'Construction Conundrum'
         ja: '建設現場の不思議'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/vitellary'
+    - sid: 'StrawberryJam2021/2-Intermediate/vitellary'
       name:
         en: 'Pointless Machines'
         ja: 'むなしき機械'
       sides: [0]
-    - sid: 'StrawberryJam2021/2_Intermediate/ZZ-Heartside'
+    - sid: 'StrawberryJam2021/2-Intermediate/ZZ-Heartside'
       name:
         en: 'Raspberry Roots'
         ja: 'ラズベリーの根'
       sides: [0]
+
+- level: 'StrawberryJam2021/3-Advanced'
+  maps:
+    - sid: 'StrawberryJam2021/3-Advanced/astraxel'
+      name:
+        en: 'Sands of Time'
+        ja: '時間の砂'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/BlueXans'
+      name:
+        en: 'Jellyfish Sanctum'
+        ja: 'クラゲの聖域'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Citrea'
+      name:
+        en: 'Toggle Theory'
+        ja: 'トグル理論'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/galaksyz'
+      name:
+        en: 'Slime Time!'
+        ja: 'スライムの時間！'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Goldian'
+      name:
+        en: 'Superstructure'
+        ja: '船楼'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/hennyburgr'
+      name:
+        en: 'Lethal Laser Laboratory'
+        ja: '殺人レーザー研究所'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Indecx'
+      name:
+        en: 'Starry Ruins'
+        ja: '星空の遺跡'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/JANisEXIST'
+      name:
+        en: 'The Tower (XVI)'
+        ja: '塔: XVI'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Jolly'
+      name:
+        en: 'Starlight Station'
+        ja: 'スターライト駅'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Julia'
+      name:
+        en: 'Tectonic Trenches'
+        ja: '海溝'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Maladroit'
+      name:
+        en: 'Golden Dawn'
+        ja: 'こんじきの夜明け'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Meario'
+      name:
+        en: 'Dusk City'
+        ja: 'たそがれの都市'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/MousseMoose'
+      name:
+        en: 'Synapse'
+        ja: 'シナプス'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/mmm'
+      name:
+        en: 'Forest Rush'
+        ja: '森を駆ける'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Nic'
+      name:
+        en: 'Undergrowth'
+        ja: 'アンダーグロース'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Oppen'
+      name:
+        en: 'Lost Woods'
+        ja: '迷いの森'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/pugroy'
+      name:
+        en: 'Attack on the Clone'
+        ja: 'クローンの攻撃'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/RadleyMcTuneston'
+      name:
+        en: 'The Lab'
+        ja: '研究所'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/sp1029'
+      name:
+        en: 'Thinking with Portals'
+        ja: 'ポータルを使って考えましょう'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/TilitTheStars'
+      name:
+        en: 'Bee Berserk'
+        ja: 'キラービー'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Tortoise'
+      name:
+        en: 'Java\'s Crypt'
+        ja: 'ジャバスクリプト'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Roborb'
+      name:
+        en: 'Belated Valentine\'s Day'
+        ja: ''
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Vamp'
+      name:
+        en: 'Rightside-Down Cavern'
+        ja: 'あべこべ重力の洞窟'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Viv'
+      name:
+        en: 'Call of the Void'
+        ja: 'ボイドの呼び声'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Worldwaker2'
+      name:
+        en: 'Raindrops on Roses'
+        ja: 'バラの雫'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/ZZ-Heartside'
+      name:
+        en: 'Mango Mesa'
+        ja: 'マンゴーメサ'
+      sides: [0]
+    

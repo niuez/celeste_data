@@ -24,7 +24,7 @@ pub struct LevelData {
 }
 
 impl LevelData {
-    pub fn maps(&self) -> impl Iterator<Item=MapData> {
+    pub fn maps(&self) -> impl ExactSizeIterator + Iterator<Item=MapData> {
         let mut codes = Vec::new();
         for map in self.maps.iter() {
             for side in map.sides.iter() {

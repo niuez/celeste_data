@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{ HashSet, HashMap };
 use crate::time::Time;
 use serde::{ Deserialize };
 use quick_xml::de::from_str;
@@ -10,8 +10,6 @@ pub struct SaveData {
     pub name: String,
     pub time: Time,
     pub total_deaths: u64,
-    //pub total_strawberries: u64,
-    //pub total_golden_strawberries: u64,
     pub total_jumps: u64,
     pub total_wall_jumps: u64,
     pub total_dashes: u64,
@@ -74,6 +72,10 @@ impl SaveData {
             }
         }
     }
+
+    pub fn total_strawberries(&self) -> usize {
+        self.map_stats.values().map(|v| v.total_strawberries()).sum()
+    }
 }
 
 #[derive(Debug, PartialEq, Eq, Hash)]
@@ -108,19 +110,38 @@ pub struct AreaModeStats {
     pub best_deaths: u64,
     #[serde(rename="@HeartGem")]
     pub heart_gem: bool,
+    strawberries: Strawberries,
+}
+
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct Strawberries {
+    #[serde(default)]
+    #[serde(rename="EntityID")]
+    entity_id: HashSet<EntityID>,
+}
+
+
+#[derive(Deserialize, Debug, Clone, PartialEq, Eq, Hash)]
+pub struct EntityID {
+    #[serde(rename="@Key")]
+    key: String,
 }
 
 impl AreaModeStats {
-    fn merge(&mut self, right: Self) {
+    pub fn total_strawberries(&self) -> usize {
+        self.strawberries.entity_id.len()
+    }
+    fn merge(&mut self, mut right: Self) {
         //self.total_strawberries += right.total_strawberries;
+        if !self.completed {
+            std::mem::swap(self, &mut right);
+        }
         self.heart_gem |= right.heart_gem;
         self.deaths += right.deaths;
         self.time_played += right.time_played;
-        if !self.completed {
-            *self = right
-        }
-
-        else if right.completed {
+        self.strawberries.entity_id.extend(right.strawberries.entity_id);
+        if right.completed {
             self.completed |= right.completed;
             self.single_run_completed |= right.single_run_completed;
             self.full_clear |= right.full_clear;

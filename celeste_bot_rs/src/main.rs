@@ -290,7 +290,7 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
         Ok(save_data) => {
             let mut table = Vec::new();
             //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
-            table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string()]);
+            table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string(), "Strawberries".to_string()]);
             let sides = vec!["A", "B", "C"];
             let m = {
                 let levels = {
@@ -340,6 +340,7 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                                format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
                                stats.map(|d| format!("{}", d.best_time)).unwrap_or("-".to_string()),
                                stats.map(|d| format!("{}/{}", d.best_deaths, d.deaths)).unwrap_or("-".to_string()),
+                               stats.map(|d| format!("{}", d.total_strawberries())).unwrap_or("-".to_string())
                     ]);
                 }
             }

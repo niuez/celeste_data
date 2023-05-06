@@ -30,7 +30,7 @@ use serenity::framework::standard::{
 };
 use serenity::http::Http;
 use serenity::model::application::interaction::InteractionResponseType;
-use serenity::model::channel::{Channel, Message};
+use serenity::model::channel::{Channel, Message, AttachmentType};
 use serenity::model::gateway::{GatewayIntents, Ready};
 use serenity::model::id::UserId;
 use serenity::model::permissions::Permissions;
@@ -144,6 +144,7 @@ struct General;
 
 use celeste_save_data_rs::save_data::SaveData;
 use celeste_save_data_rs::map_data::GameData;
+use celeste_visualizer::generate_png;
 
 struct GameDataStore;
 
@@ -328,27 +329,25 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                 },
             };
             let selected_level = &interaction.data.values[0];
+
+            let png_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
             {
                 let data_read = ctx.data.read().await;
                 let game_data_lock = data_read.get::<GameDataStore>()
                     .expect("Expect GameDataStore in TypeMap").clone();
                 let game_data = game_data_lock.read().await;
 
-                for map_data in game_data.get_level_data(selected_level).unwrap().maps() {
-                    let stats = save_data.map_stats.get(&map_data.code);
-                    table.push(vec![
-                               format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
-                               stats.map(|d| format!("{}", d.best_time)).unwrap_or("-".to_string()),
-                               stats.map(|d| format!("{}/{}", d.best_deaths, d.deaths)).unwrap_or("-".to_string()),
-                               stats.map(|d| format!("{}", d.total_strawberries())).unwrap_or("-".to_string())
-                    ]);
-                }
+                generate_png(&save_data, game_data.get_level_data(selected_level).unwrap().maps(), png_file.path())
+                    .map_err(|e| format!("cant generate png {:?}", e))?;
             }
+            let tokio_file = tokio::fs::File::open(png_file.path()).await
+                .map_err(|e| format!("cant create tokio file {:?}", e))?;
             interaction.create_interaction_response(&ctx, |r| {
                 r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
-                    let mut out = std::fs::File::create("data.txt").unwrap();
-                    text_tables::render(&mut out, &table).unwrap();
-                    d.add_file("data.txt")
+                    d.add_file(AttachmentType::File {
+                        file: &tokio_file,
+                        filename: format!("{}_{}.png", msg.author, selected_level),
+                    })
                 })
             }).await?;
         }

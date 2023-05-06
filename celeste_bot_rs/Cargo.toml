@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 text-tables = "0.3.1"
+tempfile = "3"
+celeste_visualizer = { path="../celeste_visualizer" }
 
 [dependencies.serenity]
 version = "0.11.5"

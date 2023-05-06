@@ -30,6 +30,12 @@ impl std::ops::AddAssign for Time {
         self.0 += rhs.0
     }
 }
+impl std::ops::Sub for Time {
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self::Output {
+        Time(self.0 - rhs.0)
+    }
+}
 impl std::cmp::PartialEq for Time {
     fn eq(&self, other: &Self) -> bool {
         self.0 == other.0

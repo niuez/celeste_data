@@ -93,7 +93,7 @@ impl SaveData {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct MapCode {
     pub level: String,
     pub sid: String,

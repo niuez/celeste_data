@@ -1,7 +1,8 @@
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug, Clone, Copy)]
-pub struct Time(u64);
+pub struct Time(pub u64);
+
 
 fn div_rem(a: u64, b: u64) -> (u64, u64) {
     (a / b, a % b)

@@ -30,13 +30,14 @@ use serenity::framework::standard::{
 };
 use serenity::http::Http;
 use serenity::model::application::interaction::InteractionResponseType;
-use serenity::model::channel::{Channel, Message};
+use serenity::model::channel::{Channel, Message, AttachmentType};
 use serenity::model::gateway::{GatewayIntents, Ready};
 use serenity::model::id::UserId;
 use serenity::model::permissions::Permissions;
 use serenity::prelude::*;
 use serenity::utils::{content_safe, ContentSafeOptions};
 use tokio::sync::Mutex;
+use serenity::futures::StreamExt;
 
 // A container type is created for inserting into the Client's `data`, which
 // allows for data to be accessible across all events and framework commands, or
@@ -144,6 +145,7 @@ struct General;
 
 use celeste_save_data_rs::save_data::SaveData;
 use celeste_save_data_rs::map_data::GameData;
+use celeste_visualizer::generate_png;
 
 struct GameDataStore;
 
@@ -305,8 +307,18 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                     m.content("select").components(|c| {
                         c.create_action_row(|row| {
                             row.create_select_menu(|menu| {
+                                menu.custom_id("lang_select");
+                                menu.placeholder("lang");
+                                menu.options(|f| {
+                                    f.create_option(|o| o.label("en").value("en").default_selection(true));
+                                    f.create_option(|o| o.label("ja").value("ja"))
+                                })
+                            })
+                        });
+                        c.create_action_row(|row| {
+                            row.create_select_menu(|menu| {
                                 menu.custom_id("level_select");
-                                menu.placeholder("no level selected");
+                                menu.placeholder("level");
                                 menu.options(|f| {
                                     for level in levels.into_iter() {
                                         f.create_option(|o| o.label(level.to_string()).value(level.to_string()));
@@ -319,38 +331,50 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
                 })
             };
             let m = m.await.unwrap();
-            let interaction =
-                match m.await_component_interaction(&ctx).timeout(std::time::Duration::from_secs(30)).await {
-                Some(x) => x,
-                None => {
-                    m.reply(&ctx, "Timed out").await.unwrap();
-                    return Ok(());
-                },
-            };
-            let selected_level = &interaction.data.values[0];
+            let mut interaction_stream = m.await_component_interactions(&ctx)
+                .author_id(msg.author.id)
+                .timeout(std::time::Duration::from_secs(10))
+                .build();
             {
-                let data_read = ctx.data.read().await;
-                let game_data_lock = data_read.get::<GameDataStore>()
-                    .expect("Expect GameDataStore in TypeMap").clone();
-                let game_data = game_data_lock.read().await;
+                let mut selected_lang = "en".to_string();
+                while let Some(interaction) = interaction_stream.next().await {
+                    if interaction.data.custom_id == "level_select" {
+                        let selected_level = interaction.data.values[0].to_string();
 
-                for map_data in game_data.get_level_data(selected_level).unwrap().maps() {
-                    let stats = save_data.map_stats.get(&map_data.code);
-                    table.push(vec![
-                               format!("{}-{}", map_data.name.get_name(), sides[map_data.code.side]),
-                               stats.map(|d| format!("{}", d.best_time)).unwrap_or("-".to_string()),
-                               stats.map(|d| format!("{}/{}", d.best_deaths, d.deaths)).unwrap_or("-".to_string()),
-                               stats.map(|d| format!("{}", d.total_strawberries())).unwrap_or("-".to_string())
-                    ]);
+                        let png_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+                        {
+                            let data_read = ctx.data.read().await;
+                            let game_data_lock = data_read.get::<GameDataStore>()
+                                .expect("Expect GameDataStore in TypeMap").clone();
+                            let game_data = game_data_lock.read().await;
+
+                            generate_png(&save_data, game_data.get_level_data(&selected_level).unwrap().maps(), png_file.path(), &selected_lang)
+                                .map_err(|e| format!("cant generate png {:?}", e))?;
+                        }
+                        let tokio_file = tokio::fs::File::open(png_file.path()).await
+                            .map_err(|e| format!("cant create tokio file {:?}", e))?;
+                        interaction.create_interaction_response(&ctx, |r| {
+                            r.kind(InteractionResponseType::ChannelMessageWithSource).interaction_response_data(|d| {
+                                d.add_file(AttachmentType::File {
+                                    file: &tokio_file,
+                                    filename: format!("{}_{}.png", msg.author, &selected_level),
+                                })
+                            })
+                        }).await?;
+                        break;
+                    }
+                    else {
+                        selected_lang = interaction.data.values[0].to_string();
+                        interaction.create_interaction_response(&ctx, |r| {
+                            r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
+                                d.content(format!("{}", selected_lang))
+                            })
+                        }).await?;
+                    }
                 }
-            }
-            interaction.create_interaction_response(&ctx, |r| {
-                r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
-                    let mut out = std::fs::File::create("data.txt").unwrap();
-                    text_tables::render(&mut out, &table).unwrap();
-                    d.add_file("data.txt")
-                })
-            }).await?;
+                m.delete(&ctx).await?;
+                return Ok(());
+            };
         }
     }
     Ok(())

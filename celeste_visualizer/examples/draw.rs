@@ -8,7 +8,7 @@ fn main() {
     let save_data = SaveData::from_str(&xml).unwrap();
     let yml = std::fs::read_to_string("../maps.yaml").unwrap();
     let game_data: GameData = GameData::from_str(&yml).unwrap();
-    let chart = generate_svg_str(&save_data, game_data.get_level_data("Celeste").unwrap().maps());
+    let chart = generate_svg_str(&save_data, game_data.get_level_data("Celeste").unwrap().maps(), "en");
     println!("{}", chart.to_string());
-    println!("{:?}", generate_png(&save_data, game_data.get_level_data("Celeste").unwrap().maps(), "test.png"));
+    println!("{:?}", generate_png(&save_data, game_data.get_level_data("Celeste").unwrap().maps(), "test.png", "en"));
 }

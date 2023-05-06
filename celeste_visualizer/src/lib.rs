@@ -8,7 +8,7 @@ use resvg::usvg::{ fontdb, Tree, TreeParsing, TreeTextToPath };
 use resvg::tiny_skia::Pixmap;
 use resvg::render;
 
-fn generate_svg_chart<MI>(save_data: &SaveData, map_iter: MI) -> (Chart, i64, i64)
+fn generate_svg_chart<MI>(save_data: &SaveData, map_iter: MI, lang: &str) -> (Chart, i64, i64)
     where MI: IntoIterator<Item=MapData>,
           MI::IntoIter: ExactSizeIterator,
 {
@@ -54,10 +54,10 @@ fn generate_svg_chart<MI>(save_data: &SaveData, map_iter: MI) -> (Chart, i64, i6
     for (i, MapData { code, name }) in map_iter.enumerate() {
         match save_data.map_stats.get(&code) {
             None => {
-               let elems = vec![format!("{}-{}", name.get_name(), sides[code.side]), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string()];
+               let elems = vec![format!("{}-{}", name.try_local_name(lang), sides[code.side]), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string()];
                for (j, text) in elems.into_iter().enumerate() {
                    if j == 0 {
-                       chart = chart.draw(centered_text_box(&format!("{}-{}", name.get_name(), sides[code.side])).text_anchor(text_anchor::TextAnchorValue::Start), col_acc[j], row_height / 2 + row_height * (i as i64 + 1));
+                       chart = chart.draw(centered_text_box(&text).text_anchor(text_anchor::TextAnchorValue::Start), col_acc[j], row_height / 2 + row_height * (i as i64 + 1));
                    }
                    else {
                        chart = chart.draw(centered_text_box(&text), col_acc[j] + col_widths[j] / 2, row_height / 2 + row_height * (i as i64 + 1));
@@ -65,7 +65,7 @@ fn generate_svg_chart<MI>(save_data: &SaveData, map_iter: MI) -> (Chart, i64, i6
                }
             }
             Some(stats) => {
-                let ch_text = centered_text_box(&format!("{}-{}", name.get_name(), sides[code.side])).text_anchor(text_anchor::TextAnchorValue::Start);
+                let ch_text = centered_text_box(&format!("{}-{}", name.try_local_name(lang), sides[code.side])).text_anchor(text_anchor::TextAnchorValue::Start);
 
                 let sb_text = centered_text_box(&stats.total_strawberries().to_string());
 
@@ -153,20 +153,20 @@ fn generate_svg_chart<MI>(save_data: &SaveData, map_iter: MI) -> (Chart, i64, i6
     (chart, chart_width, chart_height)
 }
 
-pub fn generate_svg_str<MI>(save_data: &SaveData, map_iter: MI) -> String 
+pub fn generate_svg_str<MI>(save_data: &SaveData, map_iter: MI, lang: &str) -> String 
     where MI: IntoIterator<Item=MapData>,
           MI::IntoIter: ExactSizeIterator,
 {
-    let (chart, _, _) = generate_svg_chart(save_data, map_iter);
+    let (chart, _, _) = generate_svg_chart(save_data, map_iter, lang);
     chart.to_string()
 }
 
-pub fn generate_png<P, MI>(save_data: &SaveData, map_iter: MI, path: P) -> Result<(), String>
+pub fn generate_png<P, MI>(save_data: &SaveData, map_iter: MI, path: P, lang: &str) -> Result<(), String>
     where MI: IntoIterator<Item=MapData>,
           MI::IntoIter: ExactSizeIterator,
           P: AsRef<std::path::Path>,
 {
-    let (chart, width, height) = generate_svg_chart(save_data, map_iter);
+    let (chart, width, height) = generate_svg_chart(save_data, map_iter, lang);
     let mut pixmap = Pixmap::new(width as u32, height as u32).unwrap();
     let option = {
         let mut opt = resvg::usvg::Options::default();

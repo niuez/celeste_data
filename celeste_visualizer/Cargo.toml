@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 celeste_save_data_rs = { path="../celeste_save_data_rs" }
 svg_vis = { git="https://github.com/niuez/svg_vis" }
+resvg = "0.32.0"

@@ -231,15 +231,16 @@ pub fn diff_svg_chart(game_data: &GameData, before: &SaveData, after: &SaveData,
         chart = chart.draw(path, 0, row_height * (i as i64 * 2 + 1))
     }
     for (i, (MapData { code, name }, stats_diff)) in diff.stats_diffs.into_iter().enumerate() {
+        {
+            let text = format!("{}-{}", name.try_local_name(lang), sides[code.side]);
+            chart = chart.draw(centered_text_box(&text).text_anchor(text_anchor::TextAnchorValue::Start), col_acc[0], row_height / 2 + row_height * (i as i64 * 2 + 1));
+        }
         for (k, sd) in [before, after].into_iter().enumerate() {
             match sd.map_stats.get(&code) {
                 None => {
                     let elems = vec![format!("{}-{}", name.try_local_name(lang), sides[code.side]), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string(), "-".to_string()];
                     for (j, text) in elems.into_iter().enumerate() {
                         if j == 0 {
-                            if k == 0 {
-                                chart = chart.draw(centered_text_box(&text).text_anchor(text_anchor::TextAnchorValue::Start), col_acc[j], row_height / 2 + row_height * (i as i64 + 1));
-                            }
                         }
                         else {
                             chart = chart.draw(centered_text_box(&text), col_acc[j] + col_widths[j] / 2, row_height / 2 + row_height * (i as i64 * 2 + k as i64 + 1));
@@ -310,10 +311,6 @@ pub fn diff_svg_chart(game_data: &GameData, before: &SaveData, after: &SaveData,
                     let fc_text = centered_text_box(&fc_str);
                     let row_start = row_height * (i as i64 * 2 + k as i64 + 1);
                     let row_center = row_height * (i as i64 * 2 + k as i64 + 1) + row_height / 2;
-                    if k == 0 {
-                        chart = chart
-                            .draw(ch_text, col_acc[0], row_center)
-                    }
                     chart = chart
                         .draw(sb_text, col_acc[1] + col_widths[1] / 2, row_center)
                         .draw(best_bg, col_acc[2], row_start)

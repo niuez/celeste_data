@@ -21,6 +21,21 @@ pub struct SaveData {
 }
 
 impl SaveData {
+    pub fn new() -> Self {
+        Self {
+            version: String::new(),
+            name: String::new(),
+            time: Time(0),
+            total_deaths: 0,
+            total_jumps: 0,
+            total_wall_jumps: 0,
+            total_dashes: 0,
+            last_area: LastArea::default(),
+            areas: Areas::default(),
+            level_sets: LevelSets::default(),
+            map_stats: HashMap::new(),
+        }
+    }
     fn build_map_stats(&mut self) {
         self.map_stats.clear();
         for area in self.areas.area_stats.iter() {
@@ -78,7 +93,7 @@ impl SaveData {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct MapCode {
     pub level: String,
     pub sid: String,
@@ -110,7 +125,7 @@ pub struct AreaModeStats {
     pub best_deaths: u64,
     #[serde(rename="@HeartGem")]
     pub heart_gem: bool,
-    strawberries: Strawberries,
+    pub strawberries: Strawberries,
 }
 
 
@@ -118,14 +133,14 @@ pub struct AreaModeStats {
 pub struct Strawberries {
     #[serde(default)]
     #[serde(rename="EntityID")]
-    entity_id: HashSet<EntityID>,
+    pub entity_id: HashSet<EntityID>,
 }
 
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Eq, Hash)]
 pub struct EntityID {
     #[serde(rename="@Key")]
-    key: String,
+    pub key: String,
 }
 
 impl AreaModeStats {
@@ -154,14 +169,14 @@ impl AreaModeStats {
 }
 
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 #[serde(rename_all="PascalCase")]
 pub struct LastArea {
     #[serde(rename="@SID")]
     pub sid: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 #[serde(rename_all="PascalCase")]
 struct Areas {
     #[serde(default)]
@@ -177,13 +192,13 @@ struct AreaStats {
     sid: String,
     modes: Modes
 }
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 #[serde(rename_all="PascalCase")]
 struct Modes {
     area_mode_stats: Vec<AreaModeStats>
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 #[serde(rename_all="PascalCase")]
 struct LevelSets {
     #[serde(default)]

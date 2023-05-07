@@ -1,5 +1,3 @@
-*.svg
-*.png
 /target
 /Cargo.lock
 *.celeste

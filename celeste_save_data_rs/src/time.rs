@@ -1,7 +1,8 @@
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug, Clone, Copy)]
-pub struct Time(u64);
+pub struct Time(pub u64);
+
 
 fn div_rem(a: u64, b: u64) -> (u64, u64) {
     (a / b, a % b)
@@ -27,6 +28,12 @@ impl std::ops::Add for Time {
 impl std::ops::AddAssign for Time {
     fn add_assign(&mut self, rhs: Self) {
         self.0 += rhs.0
+    }
+}
+impl std::ops::Sub for Time {
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self::Output {
+        Time(self.0 - rhs.0)
     }
 }
 impl std::cmp::PartialEq for Time {

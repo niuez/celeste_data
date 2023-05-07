@@ -42,6 +42,7 @@ impl LevelData {
     }
 }
 
+#[derive(Debug)]
 pub struct MapData {
     pub code: MapCode,
     pub name: Name,

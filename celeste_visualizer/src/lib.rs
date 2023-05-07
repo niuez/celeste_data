@@ -1,3 +1,5 @@
+pub mod diff;
+
 use svg_vis::chart::Chart;
 use svg_vis::attribute::*;
 use svg_vis::literal::Color;

@@ -347,7 +347,7 @@ pub fn diff_svg_chart(game_data: &GameData, before: &SaveData, after: &SaveData,
                     .close()
                     .fill_opacity(0)
                     .stroke_width(diff_rect_width)
-                    .stroke(Color::from_name("blue"));
+                    .stroke(Color::from_name("red"));
                 chart = chart.draw(rect, diff_rect_mergin, row_height * (i as i64 * 2 + 1) + diff_rect_mergin);
             }
             StatsDiff::AfterOnly => {
@@ -358,7 +358,7 @@ pub fn diff_svg_chart(game_data: &GameData, before: &SaveData, after: &SaveData,
                     .close()
                     .fill_opacity(0)
                     .stroke_width(diff_rect_width)
-                    .stroke(Color::from_name("red"));
+                    .stroke(Color::from_name("blue"));
                 chart = chart.draw(rect, diff_rect_mergin, row_height * (i as i64 * 2 + 1) + diff_rect_mergin);
             }
             StatsDiff::Diff { strawberries, best_deaths, deaths, clr, fc } => {

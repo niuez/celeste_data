@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(about, update)]
+#[commands(load, about, update)]
 struct General;
 
 
@@ -295,6 +295,112 @@ async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
     save_data.ok_or_else(|| "no attachments".to_string())
 }
 
+async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> CommandResult {
+    let mut table = Vec::new();
+    //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
+    table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string(), "Strawberries".to_string()]);
+    let sides = vec!["A", "B", "C"];
+    let m = {
+        let levels = {
+            let data_read = ctx.data.read().await;
+            let game_data_lock = data_read.get::<GameDataStore>()
+                .expect("Expect GameDataStore in TypeMap").clone();
+            let game_data = game_data_lock.read().await;
+            game_data.levels().map(|s| s.to_string()).collect::<Vec<_>>()
+        };
+
+        msg.channel_id.send_message(&ctx, |m| {
+            m.content("select").components(|c| {
+                c.create_action_row(|row| {
+                    row.create_select_menu(|menu| {
+                        menu.custom_id("lang_select");
+                        menu.placeholder("lang");
+                        menu.options(|f| {
+                            f.create_option(|o| o.label("en").value("en").default_selection(true));
+                            f.create_option(|o| o.label("ja").value("ja"))
+                        })
+                    })
+                });
+                c.create_action_row(|row| {
+                    row.create_select_menu(|menu| {
+                        menu.custom_id("level_select");
+                        menu.placeholder("level");
+                        menu.options(|f| {
+                            for level in levels.into_iter() {
+                                f.create_option(|o| o.label(level.to_string()).value(level.to_string()));
+                            }
+                            f
+                        })
+                    })
+                })
+            })
+        })
+    };
+    let m = m.await.unwrap();
+    let mut interaction_stream = m.await_component_interactions(&ctx)
+        .author_id(msg.author.id)
+        .timeout(std::time::Duration::from_secs(30))
+        .build();
+    {
+        let mut selected_lang = "en".to_string();
+        while let Some(interaction) = interaction_stream.next().await {
+            if interaction.data.custom_id == "level_select" {
+                let selected_level = interaction.data.values[0].to_string();
+
+                let png_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+                {
+                    let data_read = ctx.data.read().await;
+                    let game_data_lock = data_read.get::<GameDataStore>()
+                        .expect("Expect GameDataStore in TypeMap").clone();
+                    let game_data = game_data_lock.read().await;
+
+                    generate_png(&save_data, game_data.get_level_data(&selected_level).unwrap().maps(), png_file.path(), &selected_lang)
+                        .map_err(|e| format!("cant generate png {:?}", e))?;
+                }
+                let tokio_file = tokio::fs::File::open(png_file.path()).await
+                    .map_err(|e| format!("cant create tokio file {:?}", e))?;
+                interaction.create_interaction_response(&ctx, |r| {
+                    r.kind(InteractionResponseType::ChannelMessageWithSource).interaction_response_data(|d| {
+                        d.add_file(AttachmentType::File {
+                            file: &tokio_file,
+                            filename: format!("{}_{}.png", msg.author, &selected_level),
+                        })
+                    })
+                }).await?;
+                break;
+            }
+            else {
+                selected_lang = interaction.data.values[0].to_string();
+                interaction.create_interaction_response(&ctx, |r| {
+                    r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
+                        d.content(format!("{}", selected_lang))
+                    })
+                }).await?;
+            }
+        }
+        m.delete(&ctx).await?;
+        return Ok(());
+    };
+}
+
+#[command]
+async fn load(ctx: &Context, msg: &Message) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    let save_data = {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        db.get_save_data(&game_data, &discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?
+    };
+    load_data_dialog(ctx, msg, save_data).await?;
+    Ok(())
+}
+
 #[command]
 async fn about(ctx: &Context, msg: &Message) -> CommandResult {
     match check_save_data(msg).await {
@@ -302,91 +408,7 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
             msg.channel_id.say(&ctx.http, why).await?;
         }
         Ok(save_data) => {
-            let mut table = Vec::new();
-            //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
-            table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string(), "Strawberries".to_string()]);
-            let sides = vec!["A", "B", "C"];
-            let m = {
-                let levels = {
-                    let data_read = ctx.data.read().await;
-                    let game_data_lock = data_read.get::<GameDataStore>()
-                        .expect("Expect GameDataStore in TypeMap").clone();
-                    let game_data = game_data_lock.read().await;
-                    game_data.levels().map(|s| s.to_string()).collect::<Vec<_>>()
-                };
-
-                msg.channel_id.send_message(&ctx, |m| {
-                    m.content("select").components(|c| {
-                        c.create_action_row(|row| {
-                            row.create_select_menu(|menu| {
-                                menu.custom_id("lang_select");
-                                menu.placeholder("lang");
-                                menu.options(|f| {
-                                    f.create_option(|o| o.label("en").value("en").default_selection(true));
-                                    f.create_option(|o| o.label("ja").value("ja"))
-                                })
-                            })
-                        });
-                        c.create_action_row(|row| {
-                            row.create_select_menu(|menu| {
-                                menu.custom_id("level_select");
-                                menu.placeholder("level");
-                                menu.options(|f| {
-                                    for level in levels.into_iter() {
-                                        f.create_option(|o| o.label(level.to_string()).value(level.to_string()));
-                                    }
-                                    f
-                                })
-                            })
-                        })
-                    })
-                })
-            };
-            let m = m.await.unwrap();
-            let mut interaction_stream = m.await_component_interactions(&ctx)
-                .author_id(msg.author.id)
-                .timeout(std::time::Duration::from_secs(30))
-                .build();
-            {
-                let mut selected_lang = "en".to_string();
-                while let Some(interaction) = interaction_stream.next().await {
-                    if interaction.data.custom_id == "level_select" {
-                        let selected_level = interaction.data.values[0].to_string();
-
-                        let png_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
-                        {
-                            let data_read = ctx.data.read().await;
-                            let game_data_lock = data_read.get::<GameDataStore>()
-                                .expect("Expect GameDataStore in TypeMap").clone();
-                            let game_data = game_data_lock.read().await;
-
-                            generate_png(&save_data, game_data.get_level_data(&selected_level).unwrap().maps(), png_file.path(), &selected_lang)
-                                .map_err(|e| format!("cant generate png {:?}", e))?;
-                        }
-                        let tokio_file = tokio::fs::File::open(png_file.path()).await
-                            .map_err(|e| format!("cant create tokio file {:?}", e))?;
-                        interaction.create_interaction_response(&ctx, |r| {
-                            r.kind(InteractionResponseType::ChannelMessageWithSource).interaction_response_data(|d| {
-                                d.add_file(AttachmentType::File {
-                                    file: &tokio_file,
-                                    filename: format!("{}_{}.png", msg.author, &selected_level),
-                                })
-                            })
-                        }).await?;
-                        break;
-                    }
-                    else {
-                        selected_lang = interaction.data.values[0].to_string();
-                        interaction.create_interaction_response(&ctx, |r| {
-                            r.kind(InteractionResponseType::UpdateMessage).interaction_response_data(|d| {
-                                d.content(format!("{}", selected_lang))
-                            })
-                        }).await?;
-                    }
-                }
-                m.delete(&ctx).await?;
-                return Ok(());
-            };
+            load_data_dialog(ctx, msg, save_data).await?;
         }
     }
     Ok(())

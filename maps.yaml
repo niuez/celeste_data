@@ -550,3 +550,101 @@
         en: 'Starfruit Supernova'
         ja: 'スターフルーツ超新星'
       sides: [0]
+
+- level: StrawberryJam2021/5-Grandmaster
+  maps:
+    - sid: 'StrawberryJam2021/5-Grandmaster/alisticious'
+      name:
+        en: 'Superluminary'
+        ja: 'スーパールミナリー'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/CaptainCarpensir'
+      name:
+        en: 'Belly of the Beast'
+        ja: 'ビーストバスター'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Dav'
+      name:
+        en: 'World Abyss'
+        ja: 'せかいのおおあな'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/DeathKontrol'
+      name:
+        en: 'Cycle Madness B-Side'
+        ja: 'Cycle Madness B面'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Ecl1psed'
+      name:
+        en: 'Stellar Pdyssey'
+        ja: 'ステラ・オデッセイ'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/fishtank'
+      name:
+        en: '74'
+        ja: '74'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Hydro'
+      name:
+        en: 'Shattersong'
+        ja: 'シャッターソング'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Linj'
+      name:
+        en: 'Ivory'
+        ja: 'アイボリー'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/math'
+      name:
+        en: 'summit'
+        ja: 'いただき'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/maya'
+      name:
+        en: 'Pinball Purgatory'
+        ja: 'ピンボール煉獄'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/RedBatNick'
+      name:
+        en: 'Cave of the Crimson Sky'
+        ja: 'クリムゾン・スカイの洞窟'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Soloiini'
+      name:
+        en: 'The Solar Express'
+        ja: '太陽系特急列車'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/tcookiem'
+      name:
+        en: 'Flipside Cliffside'
+        ja: 'フリップサイド・クリフサイド'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/tobyaaa'
+      name:
+        en: 'Lava Layer'
+        ja: '溶岩層'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Todd'
+      name:
+        en: 'kevintechspam.bin'
+        ja: 'kevintechspam.bin'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/tofu'
+      name:
+        en: 'Nelumbo'
+        ja: '君子之花'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/xlibiza'
+      name:
+        en: 'Drifting Deep'
+        ja: '深層漂流'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/xplosives'
+      name:
+        en: 'Fractured Iridescence'
+        ja: 'ひび割れた玉虫色'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/ZZ-HeartSide'
+      name:
+        en: 'Passionfruit Pantheon'
+        ja: 'パッションフルーツ万神殿'
+      sides: [0]

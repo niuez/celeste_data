@@ -648,3 +648,394 @@
         en: 'Passionfruit Pantheon'
         ja: 'パッションフルーツ万神殿'
       sides: [0]
+
+- level: SpringCollab2020/1-Beginner
+  maps:
+    - sid: 'SpringCollab2020/1-Beginner/Abby'
+      name:
+        en: 'Heavenly Altitudes'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Bissy'
+      name:
+        en: 'Desolate Spire'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/CANADIAN'
+      name:
+        en: 'Azurite Ascent'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Cat_in_Box_01'
+      name:
+        en: 'Seeker Temple'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Cookie'
+      name:
+        en: 'Crystal Enigma'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Cruor'
+      name:
+        en: 'Space Jam Fever Dream'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/DanTKO'
+      name:
+        en: 'Electric Stratosphere'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Flagpole1up'
+      name:
+        en: 'Blast Processing'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Ghajestis'
+      name:
+        en: 'The Singularity'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/hennyburgr'
+      name:
+        en: 'Badeline Block Belt'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/iamdadbod'
+      name:
+        en: 'Temple of the Kevins'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/IsaGoodFriend'
+      name:
+        en: 'Thoughtful Dreams'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/itsabrody'
+      name:
+        en: 'Mossy Caverns'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Lichtbaulb'
+      name:
+        en: 'Starjump'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Rue'
+      name:
+        en: 'Heaven''s Outer Space'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Skeleton'
+      name:
+        en: 'Cirque Maderano'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Snas'
+      name:
+        en: 'Into the Storm'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/Thegur90'
+      name:
+        en: 'Chillout Mountain'
+      sides: [0]
+    - sid: 'SpringCollab2020/1-Beginner/ZZ-HeartSide'
+      name:
+        en: 'Beginner Heart Side'
+      sides: [0]
+
+- level: SpringCollab2020/2-Intermediate
+  maps:
+    - sid: 'SpringCollab2020/2-Intermediate/aleph_null'
+      name:
+        en: 'Abandoned and Ruined'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/aridai'
+      name:
+        en: 'Ancient Engine'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Bissy'
+      name:
+        en: 'Flooded Waterways'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Bonicle'
+      name:
+        en: 'Electrified Resort'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Clover'
+      name:
+        en: 'Jots & Scribbles'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Donker19'
+      name:
+        en: 'City of Tears'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Evilleafy'
+      name:
+        en: 'Dark Side of the Moon'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/GG19'
+      name:
+        en: 'Hot and Cold Cavern'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Goat'
+      name:
+        en: 'Spirit Spire'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Hallow'
+      name:
+        en: 'The Game'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/hennyburgr'
+      name:
+        en: 'Circular Platform Clutter'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/iamdadbod'
+      name:
+        en: 'Stratcour Summit'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Lichtbaulb'
+      name:
+        en: 'Overgrown City'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Noax'
+      name:
+        en: 'Sizzling Citadel'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Oppen_Heimer'
+      name:
+        en: 'Claustrophobia'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/phant'
+      name:
+        en: 'Heavenly'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/ProXas'
+      name:
+        en: 'Water and Ice'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Rocketguy2'
+      name:
+        en: 'Desecration'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/SilverStar'
+      name:
+        en: 'Another Summit'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Skeleton'
+      name:
+        en: 'Möbius Temple'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/TheAdvertisement'
+      name:
+        en: 'Madelina Jones and the Temple of Zoom'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/Thegur90'
+      name:
+        en: 'Serene Skydive'
+      sides: [0]
+    - sid: 'SpringCollab2020/2-Intermediate/ZZ-HeartSide'
+      name:
+        en: 'Intermediate Heart Side'
+      sides: [0]
+
+- level: SpringCollab2020/3-Advanced
+  maps:
+    - sid: 'SpringCollab2020/3-Advanced/_sleepie'
+      name:
+        en: 'Above Celeste's Peak'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/BeefyUncle'
+      name:
+        en: 'Satellite'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Bissy'
+      name:
+        en: 'Northern Lights'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Cookie'
+      name:
+        en: 'Crimson Night'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Dozing'
+      name:
+        en: 'Space Garden'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Ezel'
+      name:
+        en: 'Rhythm Realm'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Galaksyz'
+      name:
+        en: 'Lucid Caverns'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Holly'
+      name:
+        en: 'The Climb'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/iamdadbod'
+      name:
+        en: 'Ferocious Sanctuary'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/JaThePlayer'
+      name:
+        en: 'Nice Doppelgänger'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/LinjKarma'
+      name:
+        en: 'Mural Skies'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/NeoKat'
+      name:
+        en: 'nyoom'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/orbittwz'
+      name:
+        en: 'The Correlation'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Percussive'
+      name:
+        en: 'String'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/RealVet'
+      name:
+        en: 'The Dark Core'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Rufus'
+      name:
+        en: 'Toxic Sewers'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Spoopy'
+      name:
+        en: 'Cave-in Cavern'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/taco360'
+      name:
+        en: 'Dreamy Bluffs'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Thegur90'
+      name:
+        en: 'Booster in Orbit'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/Tortoise'
+      name:
+        en: 'Crumbling Castle'
+      sides: [0]
+    - sid: 'SpringCollab2020/3-Advanced/ZZ-HeartSide'
+      name:
+        en: 'Advanced Heart Side'
+      sides: [0]
+
+- level: SpringCollab2020/4-Expert
+  maps:
+    - sid: 'SpringCollab2020/4-Expert/Bissy'
+      name:
+        en: 'Starlit Grotto'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/CANADIAN'
+      name:
+        en: 'Electric Exuberance'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/ChaotiC'
+      name:
+        en: 'Switchback Station'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/dahlukeh'
+      name:
+        en: 'Ultra Sandwich'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/DeathKontrol'
+      name:
+        en: 'Cycle Madness'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/deskilln'
+      name:
+        en: 'Subterranean Exploration'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/iamdadbod'
+      name:
+        en: 'Olden Tower Ruins'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Indecx'
+      name:
+        en: 'Watertown'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Kube'
+      name:
+        en: 'Ligament'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/LethargicDoggo'
+      name:
+        en: 'Thunder Temple'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Mineman'
+      name:
+        en: 'Major Malfunction'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Mun'
+      name:
+        en: 'Trenches of Jellies'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/RadleyMcTuneston'
+      name:
+        en: 'High Voltage'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Thegur90'
+      name:
+        en: 'New Jank City'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/Zerex'
+      name:
+        en: 'Blank Dreams'
+      sides: [0]
+    - sid: 'SpringCollab2020/4-Expert/ZZ-HeartSide'
+      name:
+        en: 'Expert Heart Side'
+      sides: [0]
+
+- level: SpringCollab2020/5-Grandmaster
+  maps:
+    - sid: 'SpringCollab2020/5-Grandmaster/1nkFa1c0n'
+      name:
+        en: 'Theo Hell'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/Bissy'
+      name:
+        en: 'Crypt of the Kevins'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/BobDole'
+      name:
+        en: 'Ultra Difficult'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/CANADIAN'
+      name:
+        en: 'Heart of the Storm'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/Cyber'
+      name:
+        en: 'Fish Hell'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/DeathKontrol'
+      name:
+        en: 'Gem Garden'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/dog'
+      name:
+        en: 'Aquatic Underground'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/fishtank_overflow'
+      name:
+        en: 'KoKoDoKo?'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/Hydro0'
+      name:
+        en: 'Error 418'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/iamdadbod'
+      name:
+        en: 'Forest of the Ancients'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/Problemstrol'
+      name:
+        en: 'Tripeak Trail'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/TheDavSmasher'
+      name:
+        en: 'Temporal Tower'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/Thegur90'
+      name:
+        en: 'TheHeck90'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/ZZ-HeartSide'
+      name:
+        en: 'Old Grandmaster Heart Side'
+      sides: [0]
+    - sid: 'SpringCollab2020/5-Grandmaster/ZZ-NewHeartSide'
+      name:
+        en: 'New Grandmaster Heart Side'
+      sides: [0]

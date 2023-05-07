@@ -828,7 +828,7 @@
   maps:
     - sid: 'SpringCollab2020/3-Advanced/_sleepie'
       name:
-        en: 'Above Celeste's Peak'
+        en: 'Above Celeste''s Peak'
       sides: [0]
     - sid: 'SpringCollab2020/3-Advanced/BeefyUncle'
       name:

@@ -2,3 +2,4 @@
 *.png
 /target
 /Cargo.lock
+*.celeste

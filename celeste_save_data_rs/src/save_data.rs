@@ -13,7 +13,6 @@ pub struct SaveData {
     pub total_jumps: u64,
     pub total_wall_jumps: u64,
     pub total_dashes: u64,
-    pub last_area: LastArea,
     areas: Areas,
     level_sets: LevelSets,
     #[serde(skip)]
@@ -30,7 +29,6 @@ impl SaveData {
             total_jumps: 0,
             total_wall_jumps: 0,
             total_dashes: 0,
-            last_area: LastArea::default(),
             areas: Areas::default(),
             level_sets: LevelSets::default(),
             map_stats: HashMap::new(),
@@ -168,13 +166,6 @@ impl AreaModeStats {
     }
 }
 
-
-#[derive(Deserialize, Debug, Default)]
-#[serde(rename_all="PascalCase")]
-pub struct LastArea {
-    #[serde(rename="@SID")]
-    pub sid: String,
-}
 
 #[derive(Deserialize, Debug, Default)]
 #[serde(rename_all="PascalCase")]

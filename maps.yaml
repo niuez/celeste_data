@@ -1041,4 +1041,10 @@
         en: 'New Grandmaster Heart Side'
       sides: [0]
 
+- level: lin/1
+  maps:
+    - sid: 'lin/1/dashless'
+      name:
+        en: 'dashLess mountaIN'
+      sides: [0]
 

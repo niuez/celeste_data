@@ -61,30 +61,35 @@
         en: 'Forest Path'
         ja: '森の小径'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Bing_Over_Google'
-      name:
-        en: 'If my ''driveway'' almost did you in...'
-        ja: 'うちの前の道で死にかけたんなら・・・'
-      sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/cellularAutomaton'
       name:
         en: 'Azure Caverns'
         ja: '紺碧の洞窟'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Ceph'
-      name:
-        en: 'Cassette Cliffs'
-        ja: 'カセット崖のぼり'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Circumplex'
-      name:
-        en: 'Soap'
-        ja: 'せっけん'
-      sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/coffe'
       name:
         en: 'Loopy Lagoon'
         ja: 'カラフルドーナツの珊瑚'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/hyperlife'
+      name:
+        en: 'Collapsing Skyline'
+        ja: '崩れゆくスカイライン'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/NotYourBadeline'
+      name:
+        en: 'Seeing is Believing'
+        ja: '百聞は一見にしかず'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Bing_Over_Google'
+      name:
+        en: 'If my ''driveway'' almost did you in...'
+        ja: 'うちの前の道で死にかけたんなら・・・'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Ceph'
+      name:
+        en: 'Cassette Cliffs'
+        ja: 'カセット崖のぼり'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/CoupCritik'
       name:
@@ -96,30 +101,10 @@
         en: 'Troposphere'
         ja: '成層圏'
       sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Flagpole1up'
-      name:
-        en: 'Switchtube Vista'
-        ja: '反転土管からの眺め'
-      sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/frozenflygone'
       name:
         en: 'Potential for Anything'
         ja: 'Potential for Anything'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/HankyMueller'
-      name:
-        en: 'A Gift From the Stars'
-        ja: 'お星さまからの贈り物'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/hyperlife'
-      name:
-        en: 'Collapsing Skyline'
-        ja: '崩れゆくスカイライン'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Jadeturtle'
-      name:
-        en: 'Strawberry Orchard'
-        ja: 'いちご農園'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/joltik'
       name:
@@ -130,16 +115,6 @@
       name:
         en: 'paint'
         ja: 'ペイント'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/NotYourBadeline'
-      name:
-        en: 'Seeing is Believing'
-        ja: '百聞は一見にしかず'
-      sides: [0]
-    - sid: 'StrawberryJam2021/1-Beginner/Owen-Shirrell'
-      name:
-        en: 'Dropzle'
-        ja: 'ドロップパズル'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/Quinnigan'
       name:
@@ -155,6 +130,31 @@
       name:
         en: 'The Squeeze'
         ja: 'ジャストフィット'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Circumplex'
+      name:
+        en: 'Soap'
+        ja: 'せっけん'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Flagpole1up'
+      name:
+        en: 'Switchtube Vista'
+        ja: '反転土管からの眺め'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/HankyMueller'
+      name:
+        en: 'A Gift From the Stars'
+        ja: 'お星さまからの贈り物'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Jadeturtle'
+      name:
+        en: 'Strawberry Orchard'
+        ja: 'いちご農園'
+      sides: [0]
+    - sid: 'StrawberryJam2021/1-Beginner/Owen-Shirrell'
+      name:
+        en: 'Dropzle'
+        ja: 'ドロップパズル'
       sides: [0]
     - sid: 'StrawberryJam2021/1-Beginner/voliver9'
       name:
@@ -174,20 +174,25 @@
         en: 'Sleeping Under Stars'
         ja: '星空の下でおやすみ'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/bryse0n'
-      name:
-        en: 'Square the Circle'
-        ja: '円積問題'
-      sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/Dooshii'
       name:
         en: 'Frosted Fragments'
         ja: '霧枯れの断章'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/Emik'
+    - sid: 'StrawberryJam2021/2-Intermediate/Liero'
       name:
-        en: 'Deep Blue'
-        ja: 'ディープブルー'
+        en: 'Fifth Dimension'
+        ja: '第五次元'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/marlin'
+      name:
+        en: 'Low-G Botany'
+        ja: '低重力植物学'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/SpoopySoup'
+      name:
+        en: 'Sea of Soup'
+        ja: 'スープの海'
       sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/Evilleafy'
       name:
@@ -204,11 +209,6 @@
         en: 'Honeyzip Inc.'
         ja: 'ハニージップ株式会社'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/Ice'
-      name:
-        en: 'Temple of a Thousand Skies'
-        ja: '千の空を宿す神殿'
-      sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/Jems'
       name:
         en: 'In Filtration'
@@ -219,40 +219,40 @@
         en: 'Supernautica'
         ja: 'スーパーノーティカ'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/Liero'
+    - sid: 'StrawberryJam2021/2-Intermediate/pixelator'
       name:
-        en: 'Fifth Dimension'
-        ja: '第五次元'
+        en: 'The Tower'
+        ja: 'The Tower'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/thebreadstick1'
+      name:
+        en: 'Construction Conundrum'
+        ja: '建設現場の不思議'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/bryse0n'
+      name:
+        en: 'Square the Circle'
+        ja: '円積問題'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/Emik'
+      name:
+        en: 'Deep Blue'
+        ja: 'ディープブルー'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/Ice'
+      name:
+        en: 'Temple of a Thousand Skies'
+        ja: '千の空を宿す神殿'
       sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/Luma'
       name:
         en: 'Midnight Monsoon'
         ja: '真夜中のモンスーン'
       sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/marlin'
-      name:
-        en: 'Low-G Botany'
-        ja: '低重力植物学'
-      sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/pixelator'
-      name:
-        en: 'The Tower'
-        ja: 'The Tower'
-      sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/Rocketguy2'
       name:
         en: 'Pufferfish Transportation Co.'
         ja: 'フグ運輸会社'
-      sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/SpoopySoup'
-      name:
-        en: 'Sea of Soup'
-        ja: 'スープの海'
-      sides: [0]
-    - sid: 'StrawberryJam2021/2-Intermediate/thebreadstick1'
-      name:
-        en: 'Construction Conundrum'
-        ja: '建設現場の不思議'
       sides: [0]
     - sid: 'StrawberryJam2021/2-Intermediate/vitellary'
       name:
@@ -272,25 +272,10 @@
         en: 'Sands of Time'
         ja: '時間の砂'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/BlueXans'
-      name:
-        en: 'Jellyfish Sanctum'
-        ja: 'クラゲの聖域'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Citrea'
-      name:
-        en: 'Toggle Theory'
-        ja: 'トグル理論'
-      sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/galaksyz'
       name:
         en: 'Slime Time!'
         ja: 'スライムの時間！'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Goldian'
-      name:
-        en: 'Superstructure'
-        ja: '船楼'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/hennyburgr'
       name:
@@ -302,15 +287,20 @@
         en: 'Starry Ruins'
         ja: '星空の遺跡'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/JANisEXIST'
+    - sid: 'StrawberryJam2021/3-Advanced/Nic'
       name:
-        en: 'The Tower (XVI)'
-        ja: '塔: XVI'
+        en: 'Undergrowth'
+        ja: 'アンダーグロース'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Jolly'
+    - sid: 'StrawberryJam2021/3-Advanced/Oppen'
       name:
-        en: 'Starlight Station'
-        ja: 'スターライト駅'
+        en: 'Lost Woods'
+        ja: '迷いの森'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/BlueXans'
+      name:
+        en: 'Jellyfish Sanctum'
+        ja: 'クラゲの聖域'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Julia'
       name:
@@ -322,45 +312,15 @@
         en: 'Golden Dawn'
         ja: 'こんじきの夜明け'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Meario'
-      name:
-        en: 'Dusk City'
-        ja: 'たそがれの都市'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/MousseMoose'
-      name:
-        en: 'Synapse'
-        ja: 'シナプス'
-      sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/mmm'
       name:
         en: 'Forest Rush'
         ja: '森を駆ける'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Nic'
-      name:
-        en: 'Undergrowth'
-        ja: 'アンダーグロース'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Oppen'
-      name:
-        en: 'Lost Woods'
-        ja: '迷いの森'
-      sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/pugroy'
       name:
         en: 'Attack on the Clone'
         ja: 'クローンの攻撃'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/RadleyMcTuneston'
-      name:
-        en: 'The Lab'
-        ja: '研究所'
-      sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/sp1029'
-      name:
-        en: 'Thinking with Portals'
-        ja: 'ポータルを使って考えましょう'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/TiltTheStars'
       name:
@@ -372,10 +332,55 @@
         en: 'Java''s Crypt'
         ja: 'ジャバスクリプト'
       sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Worldwaker2'
+      name:
+        en: 'Raindrops on Roses'
+        ja: 'バラの雫'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Citrea'
+      name:
+        en: 'Toggle Theory'
+        ja: 'トグル理論'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Goldian'
+      name:
+        en: 'Superstructure'
+        ja: '船楼'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/JANisEXIST'
+      name:
+        en: 'The Tower (XVI)'
+        ja: '塔: XVI'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Jolly'
+      name:
+        en: 'Starlight Station'
+        ja: 'スターライト駅'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/Meario'
+      name:
+        en: 'Dusk City'
+        ja: 'たそがれの都市'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/MousseMoose'
+      name:
+        en: 'Synapse'
+        ja: 'シナプス'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/RadleyMcTuneston'
+      name:
+        en: 'The Lab'
+        ja: '研究所'
+      sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Roborb'
       name:
         en: 'Belated Valentine''s Day'
         ja: '遅ればせながらバレンタインの日'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/sp1029'
+      name:
+        en: 'Thinking with Portals'
+        ja: 'ポータルを使って考えましょう'
       sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/Vamp'
       name:
@@ -387,11 +392,6 @@
         en: 'Call of the Void'
         ja: 'ボイドの呼び声'
       sides: [0]
-    - sid: 'StrawberryJam2021/3-Advanced/Worldwaker2'
-      name:
-        en: 'Raindrops on Roses'
-        ja: 'バラの雫'
-      sides: [0]
     - sid: 'StrawberryJam2021/3-Advanced/ZZ-HeartSide'
       name:
         en: 'Mango Mesa'
@@ -400,50 +400,55 @@
     
 - level: StrawberryJam2021/4-Expert
   maps:
-    - sid: 'StrawberryJam2021/4-Expert/Agent'
-      name:
-        en: 'A Change in Direction'
-        ja: '方向転換'
-      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/alicequasar'
       name:
         en: 'Flying Battery'
         ja: '宙を舞う乾電池'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Appels'
-      name:
-        en: 'Skyline Usurper'
-        ja: '地平線をこの手に'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Archire'
-      name:
-        en: 'Chromatic Complex'
-        ja: 'クロマティック・コンプレックス'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Aspar'
-      name:
-        en: 'Fortress Fall'
-        ja: '秋づく城跡'
       sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/Banana23'
       name:
         en: 'The Core Problem'
         ja: '問題の核'
       sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Cabob'
-      name:
-        en: 'Psychokinetic'
-        ja: 'サイコキネシス'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/DanTKO'
-      name:
-        en: 'Garden of Khu''tara'
-        ja: 'クータラの庭園'
-      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/Flamecrafter113'
       name:
         en: 'Overgrown Linn'
         ja: '生い茂る滝つぼ'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Jackal'
+      name:
+        en: 'Hydroshock'
+        ja: 'ハイドロショック'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/nyan'
+      name:
+        en: 'Subway Neon'
+        ja: '地下鉄ネオン'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/powerav'
+      name:
+        en: 'Meaningless Contraptinos'
+        ja: 'がらくた発明'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/RedBoule'
+      name:
+        en: 'Golden Alleyway'
+        ja: 'きんいろ裏通り'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Skunkynator'
+      name:
+        en: 'System.InvalidMapException'
+        ja: 'System.InvalidMapException'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Agent'
+      name:
+        en: 'A Change in Direction'
+        ja: '方向転換'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Appels'
+      name:
+        en: 'Skyline Usurper'
+        ja: '地平線をこの手に'
       sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/fonda1515'
       name:
@@ -455,16 +460,6 @@
         en: 'Plasma Reactor'
         ja: 'プラズマ・リアクター'
       sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/itsabrody'
-      name:
-        en: 'Narrow Hollow'
-        ja: '窮屈な旧窟'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Jackal'
-      name:
-        en: 'Hydroshock'
-        ja: 'ハイドロショック'
-      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/KAERRA'
       name:
         en: 'FLOATING POINT'
@@ -475,30 +470,15 @@
         en: 'Storm Runner'
         ja: 'ストームランナー'
       sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Linj'
-      name:
-        en: 'Summit Down-side'
-        ja: '頂 下面'
-      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/Moladan'
       name:
         en: 'Time Trouble'
         ja: 'タイムトラブル'
       sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/nyan'
-      name:
-        en: 'Subway Neon'
-        ja: '地下鉄ネオン'
-      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/pansear'
       name:
         en: 'Hypnagogia'
         ja: '夢うつつ'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/powerav'
-      name:
-        en: 'Meaningless Contraptinos'
-        ja: 'がらくた発明'
       sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/QuantumSpaceman'
       name:
@@ -509,21 +489,6 @@
       name:
         en: 'Vinculum'
         ja: '絆'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/RedBoule'
-      name:
-        en: 'Golden Alleyway'
-        ja: 'きんいろ裏通り'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Scroogle'
-      name:
-        en: 'Mosaic Garden'
-        ja: 'モザイクガーデン'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Skunkynator'
-      name:
-        en: 'System.InvalidMapException'
-        ja: 'System.InvalidMapException'
       sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/spirialis'
       name:
@@ -540,6 +505,41 @@
         en: 'Madeline: The Bubble'
         ja: 'マデリン：ザ・バブル'
       sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Archire'
+      name:
+        en: 'Chromatic Complex'
+        ja: 'クロマティック・コンプレックス'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Aspar'
+      name:
+        en: 'Fortress Fall'
+        ja: '秋づく城跡'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Cabob'
+      name:
+        en: 'Psychokinetic'
+        ja: 'サイコキネシス'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/DanTKO'
+      name:
+        en: 'Garden of Khu''tara'
+        ja: 'クータラの庭園'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/itsabrody'
+      name:
+        en: 'Narrow Hollow'
+        ja: '窮屈な旧窟'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Linj'
+      name:
+        en: 'Summit Down-side'
+        ja: '頂 下面'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Scroogle'
+      name:
+        en: 'Mosaic Garden'
+        ja: 'モザイクガーデン'
+      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/Yoshachobi7'
       name:
         en: 'Polaris'
@@ -553,6 +553,26 @@
 
 - level: StrawberryJam2021/5-Grandmaster
   maps:
+    - sid: 'StrawberryJam2021/5-Grandmaster/tcookiem'
+      name:
+        en: 'Flipside Cliffside'
+        ja: 'フリップサイド・クリフサイド'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/tobyaaa'
+      name:
+        en: 'Lava Layer'
+        ja: '溶岩層'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Todd'
+      name:
+        en: 'kevintechspam.bin'
+        ja: 'kevintechspam.bin'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/xplosives'
+      name:
+        en: 'Fractured Iridescence'
+        ja: 'ひび割れた玉虫色'
+      sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/alisticious'
       name:
         en: 'Superluminary'
@@ -563,15 +583,25 @@
         en: 'Belly of the Beast'
         ja: 'ビーストバスター'
       sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/Dav'
-      name:
-        en: 'World Abyss'
-        ja: 'せかいのおおあな'
-      sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/DeathKontrol'
       name:
         en: 'Cycle Madness B-Side'
         ja: 'Cycle Madness B面'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/RedBatNick'
+      name:
+        en: 'Cave of the Crimson Sky'
+        ja: 'クリムゾン・スカイの洞窟'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/xlibiza'
+      name:
+        en: 'Drifting Deep'
+        ja: '深層漂流'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Dav'
+      name:
+        en: 'World Abyss'
+        ja: 'せかいのおおあな'
       sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/Ecl1psed'
       name:
@@ -588,60 +618,30 @@
         en: 'Shattersong'
         ja: 'シャッターソング'
       sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/Linj'
-      name:
-        en: 'Ivory'
-        ja: 'アイボリー'
-      sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/math'
       name:
         en: 'summit'
         ja: 'いただき'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Linj'
+      name:
+        en: 'Ivory'
+        ja: 'アイボリー'
       sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/maya'
       name:
         en: 'Pinball Purgatory'
         ja: 'ピンボール煉獄'
       sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/RedBatNick'
-      name:
-        en: 'Cave of the Crimson Sky'
-        ja: 'クリムゾン・スカイの洞窟'
-      sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/Soloiini'
       name:
         en: 'The Solar Express'
         ja: '太陽系特急列車'
       sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/tcookiem'
-      name:
-        en: 'Flipside Cliffside'
-        ja: 'フリップサイド・クリフサイド'
-      sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/tobyaaa'
-      name:
-        en: 'Lava Layer'
-        ja: '溶岩層'
-      sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/Todd'
-      name:
-        en: 'kevintechspam.bin'
-        ja: 'kevintechspam.bin'
-      sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/tofu'
       name:
         en: 'Nelumbo'
         ja: '君子之花'
-      sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/xlibiza'
-      name:
-        en: 'Drifting Deep'
-        ja: '深層漂流'
-      sides: [0]
-    - sid: 'StrawberryJam2021/5-Grandmaster/xplosives'
-      name:
-        en: 'Fractured Iridescence'
-        ja: 'ひび割れた玉虫色'
       sides: [0]
     - sid: 'StrawberryJam2021/5-Grandmaster/ZZ-HeartSide'
       name:

@@ -490,6 +490,11 @@
         en: 'Vinculum'
         ja: '絆'
       sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/Scroogle'
+      name:
+        en: 'Mosaic Garden'
+        ja: 'モザイクガーデン'
+      sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/spirialis'
       name:
         en: 'Lunar Pagoda'
@@ -534,11 +539,6 @@
       name:
         en: 'Summit Down-side'
         ja: '頂 下面'
-      sides: [0]
-    - sid: 'StrawberryJam2021/4-Expert/Scroogle'
-      name:
-        en: 'Mosaic Garden'
-        ja: 'モザイクガーデン'
       sides: [0]
     - sid: 'StrawberryJam2021/4-Expert/Yoshachobi7'
       name:

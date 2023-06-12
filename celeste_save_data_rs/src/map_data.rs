@@ -35,6 +35,7 @@ impl LevelData {
                         side: *side,
                     },
                     name: map.name.clone(),
+                    multi_side: map.sides.len() > 1,
                 })
             }
         }
@@ -46,6 +47,24 @@ impl LevelData {
 pub struct MapData {
     pub code: MapCode,
     pub name: Name,
+    pub multi_side: bool,
+}
+
+impl MapData {
+    fn side_name(&self) -> String {
+        if self.multi_side {
+            ["-A", "-B", "-C"][self.code.side].to_owned()
+        }
+        else {
+            "".to_owned()
+        }
+    }
+    pub fn get_name(&self) -> String {
+        format!("{}{}", self.name.get_name(), self.side_name())
+    }
+    pub fn try_local_name<'a, 'b>(&'a self, lang: &'b str) -> String {
+        format!("{}{}", self.name.try_local_name(lang), self.side_name())
+    }
 }
 
 #[derive(Deserialize, Debug)]

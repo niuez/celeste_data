@@ -1,4 +1,5 @@
 - level: 'Celeste'
+  name: 'Celeste'
   maps:
     - sid: 'Celeste/1-ForsakenCity'
       name:
@@ -55,6 +56,7 @@
       sides: [0]
 
 - level: 'StrawberryJam2021/1-Beginner'
+  name: 'Strawberry Jam Beginner'
   maps:
     - sid: 'StrawberryJam2021/1-Beginner/asteriskblue'
       name:
@@ -168,6 +170,7 @@
       sides: [0]
 
 - level: 'StrawberryJam2021/2-Intermediate'
+  name: 'Strawberry Jam Intermediate'
   maps:
     - sid: 'StrawberryJam2021/2-Intermediate/Arphimigon'
       name:
@@ -266,6 +269,7 @@
       sides: [0]
 
 - level: 'StrawberryJam2021/3-Advanced'
+  name: 'Strawberry Jam Advanced'
   maps:
     - sid: 'StrawberryJam2021/3-Advanced/astraxel'
       name:
@@ -399,6 +403,7 @@
       sides: [0]
     
 - level: StrawberryJam2021/4-Expert
+  name: 'Strawberry Jam Expert'
   maps:
     - sid: 'StrawberryJam2021/4-Expert/alicequasar'
       name:
@@ -552,6 +557,7 @@
       sides: [0]
 
 - level: StrawberryJam2021/5-Grandmaster
+  name: 'Strawberry Jam Grandmaster'
   maps:
     - sid: 'StrawberryJam2021/5-Grandmaster/tcookiem'
       name:
@@ -651,6 +657,7 @@
 
 
 - level: SpringCollab2020/1-Beginner
+  name: 'Spring Collab Beginner'
   maps:
     - sid: 'SpringCollab2020/1-Beginner/Abby'
       name:
@@ -730,6 +737,7 @@
       sides: [0]
 
 - level: SpringCollab2020/2-Intermediate
+  name: 'Spring Collab Intermediate'
   maps:
     - sid: 'SpringCollab2020/2-Intermediate/aleph_null'
       name:
@@ -825,6 +833,7 @@
       sides: [0]
 
 - level: SpringCollab2020/3-Advanced
+  name: 'Spring Collab Advanced'
   maps:
     - sid: 'SpringCollab2020/3-Advanced/_sleepie'
       name:
@@ -912,6 +921,7 @@
       sides: [0]
 
 - level: SpringCollab2020/4-Expert
+  name: 'Spring Collab Expert'
   maps:
     - sid: 'SpringCollab2020/4-Expert/Bissy'
       name:
@@ -979,6 +989,7 @@
       sides: [0]
 
 - level: SpringCollab2020/5-Grandmaster
+  name: 'Spring Collab Grandmaster'
   maps:
     - sid: 'SpringCollab2020/5-Grandmaster/1nkFa1c0n'
       name:
@@ -1042,12 +1053,14 @@
       sides: [0]
 
 - level: lin/1
+  name: 'dashLess mountaIN'
   maps:
     - sid: 'lin/1/dashless'
       name:
         en: 'dashLess mountaIN'
       sides: [0]
 - level: Bana23/Banaba
+  name: 'Another Farewell'
   maps:
     - sid: 'Bana23/Banaba/AFM'
       name:

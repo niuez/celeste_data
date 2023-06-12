@@ -105,7 +105,7 @@ impl CelesteDB {
     pub async fn update_record(&self, save_data: &SaveData, game_data: &GameData, discord_id: &str) -> Result<(), String> {
         let upsert_option = FindOneAndReplaceOptions::builder().upsert(true).build();
         for level in game_data.levels() {
-            for map_data in game_data.get_level_data(level).unwrap().maps() {
+            for map_data in game_data.get_level_data(&level.level).unwrap().maps() {
                 if let Some(stats) = save_data.map_stats.get(&map_data.code) {
                     let map_record = MapRecord::from_stats(&map_data.code, stats, discord_id);
                     self.record_col.find_one_and_replace(

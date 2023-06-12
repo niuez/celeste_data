@@ -9,8 +9,8 @@ impl GameData {
     pub fn from_str(yml_str: &str) -> Result<Self, String> {
         serde_yaml::from_str(yml_str).map_err(|e| format!("cannot parse yaml: {:?}", e))
     }
-    pub fn levels<'a>(&'a self) -> impl Iterator<Item=&'a str> {
-        self.0.iter().map(|d| d.level.as_str())
+    pub fn levels<'a>(&'a self) -> impl Iterator<Item=&'a LevelData> {
+        self.0.iter().map(|d| d)
     }
     pub fn get_level_data<'a, 'b>(&'a self, level: &'b str) -> Option<&'a LevelData> {
         self.0.iter().find(|d| d.level == level)
@@ -20,6 +20,7 @@ impl GameData {
 #[derive(Deserialize, Debug)]
 pub struct LevelData {
     pub level: String,
+    pub name: String,
     maps: Vec<MapDataRaw>,
 }
 

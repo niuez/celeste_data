@@ -15,7 +15,7 @@ impl SaveDataDiff {
     fn create_diff(game_data: &GameData, before: &SaveData, after: &SaveData) -> Self {
         let mut diff = Self::new();
         for level in game_data.levels() {
-            for map_data in game_data.get_level_data(level).unwrap().maps() {
+            for map_data in game_data.get_level_data(level.level.as_str()).unwrap().maps() {
                 let stats_diff = match (before.map_stats.get(&map_data.code), after.map_stats.get(&map_data.code)) {
                     (None, None) => StatsDiff::Same,
                     (Some(_), None) => StatsDiff::BeforeOnly,

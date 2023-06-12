@@ -306,7 +306,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
             let game_data_lock = data_read.get::<GameDataStore>()
                 .expect("Expect GameDataStore in TypeMap").clone();
             let game_data = game_data_lock.read().await;
-            game_data.levels().map(|s| s.to_string()).collect::<Vec<_>>()
+            game_data.levels().map(|s| (s.level.to_string(), s.name.to_string())).collect::<Vec<_>>()
         };
 
         msg.channel_id.send_message(&ctx, |m| {
@@ -326,8 +326,8 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
                         menu.custom_id("level_select");
                         menu.placeholder("level");
                         menu.options(|f| {
-                            for level in levels.into_iter() {
-                                f.create_option(|o| o.label(level.to_string()).value(level.to_string()));
+                            for (level, name) in levels.into_iter() {
+                                f.create_option(|o| o.label(name.to_string()).value(level.to_string()));
                             }
                             f
                         })

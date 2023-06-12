@@ -1049,15 +1049,15 @@
       sides: [0]
 - level: Bana23/Banaba
   maps:
-    - sid: 'Bana23/Banaba/AFM
+    - sid: 'Bana23/Banaba/AFM'
       name:
         en: 'Another Farewell A'
       sides: [0]
-    - sid: 'Bana23/Banaba/BFM
+    - sid: 'Bana23/Banaba/BFM'
       name:
         en: 'Another Farewell B'
       sides: [0]
-    - sid: 'Bana23/Banaba/CFM
+    - sid: 'Bana23/Banaba/CFM'
       name:
         en: 'Another Farewell C'
       sides: [0]

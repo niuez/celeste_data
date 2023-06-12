@@ -78,10 +78,13 @@ struct MapDataRaw {
 pub struct Name(HashMap<String, String>);
 
 impl Name {
-    pub fn get_name(&self) -> &str {
+    pub fn get_name<'a>(&'a self) -> &'a str {
         self.0.get("en").unwrap().as_str()
     }
     pub fn try_local_name<'a, 'b>(&'a self, lang: &'b str) -> &'a str {
-        self.0.get(lang).unwrap().as_str()
+        match self.0.get(lang) {
+            None => self.get_name(),
+            Some(n) => n.as_str(),
+        }
     }
 }

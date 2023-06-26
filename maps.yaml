@@ -1074,3 +1074,184 @@
       name:
         en: 'Another Farewell C'
       sides: [0]
+- level: SecretSanta2023/1-Easy
+  name: 'Secret Santa 2023 Easy'
+  maps:
+    - sid: 'SecretSanta2023/1-Easy/AliceQuasar'
+      name:
+        en: 'AMERICAN HIGHSCHOOL SIMULATOR'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/banana23'
+      name:
+        en: 'Mysterious Mansion'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/DanTKO'
+      name:
+        en: 'Down The Drain'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/Ezel'
+      name:
+        en: 'Light and Dusk'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/tobyaaa'
+      name:
+        en: 'Pool Day!'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/ABuffZucchini'
+      name:
+        en: 'Sensei''s Lost Castle'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/EllisVesper'
+      name:
+        en: 'Stutterstep'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/Jan'
+      name:
+        en: 'The Creative Process'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/oknano'
+      name:
+        en: 'KUROI YUME'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/ricky06'
+      name:
+        en: 'The Summer Before Christmas'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/toto00'
+      name:
+        en: 'Dungeon of Id'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/Donker19'
+      name:
+        en: 'A Conifer'' Cry'
+      sides: [0]
+    - sid: 'SecretSanta2023/1-Easy/Luma'
+      name:
+        en: 'Obsidian Badlands'
+      sides: [0]
+- level: SecretSanta2023/2-Medium
+  name: 'Secret Santa 2023 Medium'
+  maps:
+    - sid: 'SecretSanta2023/2-Medium/bluexans'
+      name:
+        en: 'Haphazard Highrise'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/Flamecrafter113'
+      name:
+        en: 'Delusion Industries'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/hennyburgr'
+      name:
+        en: 'Swapsong Station'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/LegS'
+      name:
+        en: 'Christmas 1D'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/Nyan'
+      name:
+        en: 'Garden of Eden'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/phant'
+      name:
+        en: 'Multiversal Subspace'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/Phrog'
+      name:
+        en: 'Aperture'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/powerav'
+      name:
+        en: 'The Resolutive Dance of Madeline and Alice'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/ru'
+      name:
+        en: 'Industrial Efflorescence'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/xolimono'
+      name:
+        en: 'HeavyMetalMountain'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/pansear'
+      name:
+        en: 'Wisteria'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/Quinnigan'
+      name:
+        en: 'Frosty Forest'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/Rocketguy2'
+      name:
+        en: 'Where I Was (Where I Would Like To Be A Little Later)'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/skqw'
+      name:
+        en: 'Blackstone Compound'
+      sides: [0]
+    - sid: 'SecretSanta2023/2-Medium/moladan'
+      name:
+        en: 'Sepia Supercity'
+      sides: [0]
+- level: SecretSanta2023/3-Hard
+  name: 'Secret Santa 2023 Hard'
+  maps:
+    - sid: 'SecretSanta2023/3-Hard/Aiden'
+      name:
+        en: 'Mission: Fishtermination - a Story of Love and Hate'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/hivemindsrule'
+      name:
+        en: 'HERESY: Sanguine River'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/TheDavSmasher'
+      name:
+        en: 'Caves of Mechanus'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Cabob'
+      name:
+        en: 'Astlibra'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Ecl1psed'
+      name:
+        en: 'A Gift of Exhilaration'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/fraz'
+      name:
+        en: 'The Space Scrapers'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/goose'
+      name:
+        en: 'The High Way'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/VA2M'
+      name:
+        en: 'Where The Dead Reside'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Appels'
+      name:
+        en: 'Labyrinth Mu'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/bosssauce'
+      name:
+        en: 'Waltz of the Deep'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/bryse0n'
+      name:
+        en: 'Dark Nebula'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Kazt SSC2023'
+      name:
+        en: 'Rapid Fire'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/yoshachobi7'
+      name:
+        en: 'Illusionary Archipelago'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Asgord'
+      name:
+        en: 'Unearthed'
+      sides: [0]
+    - sid: 'SecretSanta2023/3-Hard/Scribbles'
+      name:
+        en: 'Cerulean Couloir'
+      sides: [0]

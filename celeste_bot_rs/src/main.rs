@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, about, update)]
+#[commands(load, about, update, template)]
 struct General;
 
 
@@ -487,6 +487,44 @@ async fn update(ctx: &Context, msg: &Message) -> CommandResult {
             }
             else {
                 m.reply(&ctx, "dismissed").await?;
+            }
+        }
+    }
+    Ok(())
+}
+use tokio::io::{self, AsyncWriteExt};
+
+#[command]
+async fn template(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    let level = args.single::<String>()?;
+    match check_save_data(msg).await {
+        Err(why) => {
+            msg.channel_id.say(&ctx.http, why).await?;
+        }
+        Ok(after) => {
+            let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+            {
+                let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                    .map_err(|e| format!("cant create tokio file {:?}", e))?;
+                tokio_file.write(format!("- level: {}\n  name: ''\n", level).as_bytes()).await?;
+                for (map_code, _) in after.map_stats.iter() {
+                    if map_code.level == level {
+                        tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
+                        tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
+                        tokio_file.write(format!("        en: ''\n")               .as_bytes()).await?;
+                        tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                    }
+                }
+            }
+            {
+                let tokio_file = tokio::fs::File::open(ans_file.path()).await?;
+                msg.channel_id.send_message(&ctx, |m| {
+                    m.add_file(AttachmentType::File {
+                        file: &tokio_file,
+                        filename: format!("{}.yaml", level),
+                    })
+                }).await?;
             }
         }
     }

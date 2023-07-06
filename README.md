@@ -58,7 +58,7 @@
 
 ## テンプレートについて
 
-`LevelSetStats`の`Name`の文字列が分かれば、@niuez に言えばyamlのテンプレートを作成できる。TODO: botの機能にする。
+`LevelSetStats`の`Name`の文字列が分かれば、`~template <Name>`というコマンドとセーブデータを一緒に投げれば作成できる。
 
 ## ステージ名の探し方
 

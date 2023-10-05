@@ -15,6 +15,8 @@ pub struct SaveData {
     pub total_dashes: u64,
     areas: Areas,
     level_sets: LevelSets,
+    #[serde(rename="LevelSetRecycleBin")]
+    recycle_level_sets: LevelSets,
     #[serde(skip)]
     pub map_stats: HashMap<MapCode, AreaModeStats>
 }
@@ -31,6 +33,7 @@ impl SaveData {
             total_dashes: 0,
             areas: Areas::default(),
             level_sets: LevelSets::default(),
+            recycle_level_sets: LevelSets::default(),
             map_stats: HashMap::new(),
         }
     }
@@ -48,6 +51,19 @@ impl SaveData {
             }
         }
         for level in self.level_sets.level_set_stats.iter() {
+            for area in level.areas.area_stats.iter() {
+                for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
+                    self.map_stats.insert(
+                        MapCode {
+                            level: level.name.to_string(),
+                            sid: area.sid.clone(),
+                            side: i,
+                        },
+                        mode.clone());
+                }
+            }
+        }
+        for level in self.recycle_level_sets.level_set_stats.iter() {
             for area in level.areas.area_stats.iter() {
                 for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
                     self.map_stats.insert(

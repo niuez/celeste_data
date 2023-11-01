@@ -3,7 +3,7 @@ use crate::time::Time;
 use serde::{ Deserialize };
 use quick_xml::de::from_str;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all="PascalCase")]
 pub struct SaveData {
     pub version: String,
@@ -183,14 +183,14 @@ impl AreaModeStats {
 }
 
 
-#[derive(Deserialize, Debug, Default)]
+#[derive(Deserialize, Debug, Default, Clone)]
 #[serde(rename_all="PascalCase")]
 struct Areas {
     #[serde(default)]
     area_stats: Vec<AreaStats>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all="PascalCase")]
 struct AreaStats {
     #[serde(rename="@Cassette")]
@@ -199,20 +199,20 @@ struct AreaStats {
     sid: String,
     modes: Modes
 }
-#[derive(Deserialize, Debug, Default)]
+#[derive(Deserialize, Debug, Default, Clone)]
 #[serde(rename_all="PascalCase")]
 struct Modes {
     area_mode_stats: Vec<AreaModeStats>
 }
 
-#[derive(Deserialize, Debug, Default)]
+#[derive(Deserialize, Debug, Default, Clone)]
 #[serde(rename_all="PascalCase")]
 struct LevelSets {
     #[serde(default)]
     level_set_stats: Vec<LevelSetStats>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all="PascalCase")]
 struct LevelSetStats {
     #[serde(rename="@Name")]

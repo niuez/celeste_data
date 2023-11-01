@@ -12,6 +12,16 @@ impl SaveDataDiff {
             stats_diffs: Vec::new(),
         }
     }
+    fn chmax_diff(self) -> Self {
+        let stats_diffs = self.stats_diffs.into_iter()
+            .filter(|(_, diff)| {
+                diff.is_normal()
+            })
+            .collect::<Vec<(MapData, StatsDiff)>>();
+        Self {
+            stats_diffs,
+        }
+    }
     fn create_diff(game_data: &GameData, before: &SaveData, after: &SaveData) -> Self {
         let mut diff = Self::new();
         for level in game_data.levels() {
@@ -68,12 +78,19 @@ impl SaveDataDiff {
                             else if !bsr && !asr {
                                 let bsr = before.completed;
                                 let asr = after.completed;
-                                if (bsr && asr) || (!bsr && !asr) {
+                                if bsr && asr {
                                     let b = before.time_played;
                                     let a = after.time_played;
                                     if b == a { DiffParam::Same }
                                     else if b > a { DiffParam::Normal(format!("-{}", b - a)) }
                                     else { DiffParam::Outlier(format!("+{}", a - b)) }
+                                }
+                                else if !bsr && !asr {
+                                    let b = before.time_played;
+                                    let a = after.time_played;
+                                    if b == a { DiffParam::Same }
+                                    else if b < a { DiffParam::Normal(format!("+{}", a - b)) }
+                                    else { DiffParam::Outlier(format!("-{}", b - a)) }
                                 }
                                 else if !bsr && asr {
                                     DiffParam::Normal("new".to_string())
@@ -153,6 +170,19 @@ impl StatsDiff {
             self
         }
     }
+
+    pub fn is_normal(&self) -> bool {
+        match self {
+            StatsDiff::Same | StatsDiff::AfterOnly => true,
+            StatsDiff::BeforeOnly => false,
+            StatsDiff::Diff { strawberries, best_deaths, deaths, clr, fc } => 
+                strawberries.is_normal()
+                && best_deaths.is_normal()
+                && deaths.is_normal()
+                && clr.is_normal()
+                && fc.is_normal()
+        }
+    }
 }
 
 
@@ -161,6 +191,15 @@ pub enum DiffParam {
     Same,
     Normal(String),
     Outlier(String),
+}
+
+impl DiffParam {
+    pub fn is_normal(&self) -> bool {
+        match *self {
+            DiffParam::Same | DiffParam::Normal(_) => true,
+            _ => false,
+        }
+    }
 }
 
 impl Default for DiffParam {

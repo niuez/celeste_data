@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, about, update, template)]
+#[commands(load, about, update, template, chmax)]
 struct General;
 
 
@@ -409,6 +409,86 @@ async fn about(ctx: &Context, msg: &Message) -> CommandResult {
         }
         Ok(save_data) => {
             load_data_dialog(ctx, msg, save_data).await?;
+        }
+    }
+    Ok(())
+}
+
+#[command]
+async fn chmax(ctx: &Context, msg: &Message) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    match check_save_data(msg).await {
+        Err(why) => {
+            msg.channel_id.say(&ctx.http, why).await?;
+        }
+        Ok(mut after) => {
+            let png_diff_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+            {
+                let data_read = ctx.data.read().await;
+                let game_data_lock = data_read.get::<GameDataStore>()
+                    .expect("Expect GameDataStore in TypeMap").clone();
+                let game_data = game_data_lock.read().await;
+                let db_lock = data_read.get::<CelesteDBStore>()
+                    .expect("Expect CelesteDBStore in TypeMap").clone();
+                let db = db_lock.read().await;
+                let before = db.get_save_data(&game_data, &discord_id).await
+                    .map_err(|e| format!("cant get data from db {:?}", e))?;
+                after.merge(before.clone());
+                generate_diff_png(&game_data, &before, &after, png_diff_file.path(), "en")?;
+            };
+            let tokio_diff_file = tokio::fs::File::open(png_diff_file.path()).await
+                .map_err(|e| format!("cant create tokio file {:?}", e))?;
+            let m = {
+                msg.channel_id.send_message(&ctx, |m| {
+                    m.add_file(AttachmentType::File {
+                        file: &tokio_diff_file,
+                        filename: format!("{}_diff.png", msg.author),
+                    });
+                    m.content("select").components(|c| {
+                        c.create_action_row(|row| {
+                            row.create_button(|b| {
+                                b.custom_id("apply");
+                                b.label("apply");
+                                b.style(ButtonStyle::Primary)
+                            });
+                            row.create_button(|b| {
+                                b.custom_id("dismiss");
+                                b.label("dismiss");
+                                b.style(ButtonStyle::Secondary)
+                            })
+                        })
+                    })
+                })
+            };
+            let m = m.await.unwrap();
+            let interaction = match m.await_component_interaction(&ctx)
+                .author_id(msg.author.id)
+                .timeout(std::time::Duration::from_secs(30))
+                .await {
+                    Some(x) => x,
+                    None => {
+                        m.reply(&ctx, "Timed out").await.unwrap();
+                        return Ok(());
+                }
+            };
+            let selected_button = interaction.data.custom_id.clone();
+
+            if selected_button == "apply" {
+                {
+                    let data_read = ctx.data.read().await;
+                    let game_data_lock = data_read.get::<GameDataStore>()
+                        .expect("Expect GameDataStore in TypeMap").clone();
+                    let game_data = game_data_lock.read().await;
+                    let db_lock = data_read.get::<CelesteDBStore>()
+                        .expect("Expect CelesteDBStore in TypeMap").clone();
+                    let db = db_lock.read().await;
+                    db.update_record(&after, &game_data, &discord_id).await?;
+                }
+                m.reply(&ctx, "applied").await?;
+            }
+            else {
+                m.reply(&ctx, "dismissed").await?;
+            }
         }
     }
     Ok(())

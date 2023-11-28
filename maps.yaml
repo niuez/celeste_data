@@ -1257,6 +1257,7 @@
       sides: [0]
 - level: nameguysdsidespack/0
   name: 'Celeste D-Sides IV: The Resolutive Dance of Madeline and Monika'
+  maps:
     - sid: 'nameguysdsidespack/0/1-City'
       name:
         en: 'Forsaken City'

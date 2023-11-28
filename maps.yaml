@@ -1255,3 +1255,41 @@
       name:
         en: 'Cerulean Couloir'
       sides: [0]
+- level: nameguysdsidespack/0
+  name: 'Celeste D-Sides IV: The Resolutive Dance of Madeline and Monika'
+    - sid: 'nameguysdsidespack/0/1-City'
+      name:
+        en: 'Forsaken City'
+      sides: [0, 1]
+    - sid: 'nameguysdsidespack/0/2-Oldsite'
+      name:
+        en: 'Old Site'
+      sides: [0, 1]
+    - sid: 'nameguysdsidespack/0/3-Resort'
+      name:
+        en: 'Celestial Resort'
+      sides: [0, 1]
+    - sid: 'nameguysdsidespack/0/4-Ridge'
+      name:
+        en: 'Golden Ridge'
+      sides: [0, 1]
+    - sid: 'nameguysdsidespack/0/5-Temple'
+      name:
+        en: 'Mirror Temple'
+      sides: [0]
+    - sid: 'nameguysdsidespack/0/6-ReflectionD'
+      name:
+        en: 'Reflection'
+      sides: [0]
+    - sid: 'nameguysdsidespack/0/7-Summit'
+      name:
+        en: 'The Summit.'
+      sides: [0]
+    - sid: 'nameguysdsidespack/0/8-Core'
+      name:
+        en: 'Core'
+      sides: [0]
+    - sid: 'nameguysdsidespack/0/10-Farewell'
+      name:
+        en: 'Final Goodbye'
+      sides: [0]

@@ -1294,3 +1294,31 @@
       name:
         en: 'Final Goodbye'
       sides: [0]
+- level: list_love
+  name: "Heartsides"
+  maps:
+    - sid: 'StrawberryJam2021/1-Beginner/ZZ-HeartSide'
+      name:
+        en: 'Blueberry Bay'
+        ja: 'ブルーベリー湾'
+      sides: [0]
+    - sid: 'StrawberryJam2021/2-Intermediate/ZZ-HeartSide'
+      name:
+        en: 'Raspberry Roots'
+        ja: 'ラズベリーの根'
+      sides: [0]
+    - sid: 'StrawberryJam2021/3-Advanced/ZZ-HeartSide'
+      name:
+        en: 'Mango Mesa'
+        ja: 'マンゴー台地'
+      sides: [0]
+    - sid: 'StrawberryJam2021/4-Expert/ZZ-HeartSide'
+      name:
+        en: 'Starfruit Supernova'
+        ja: 'スターフルーツ超新星'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/ZZ-HeartSide'
+      name:
+        en: 'Passionfruit Pantheon'
+        ja: 'パッションフルーツ万神殿'
+      sides: [0]

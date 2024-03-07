@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/cache_cargo
+      - name: instal dep
+        run: sudo apt-get update && sudo apt-get install pkg-config libssl-dev
       - name: build
         run: cargo build --release
         working-directory: celeste_bot_rs

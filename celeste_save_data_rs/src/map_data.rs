@@ -31,7 +31,6 @@ impl LevelData {
             for side in map.sides.iter() {
                 codes.push( MapData {
                     code: MapCode {
-                        level: self.level.clone(),
                         sid: map.sid.clone(),
                         side: *side,
                     },

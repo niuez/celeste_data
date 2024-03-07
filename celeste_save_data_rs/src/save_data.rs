@@ -18,7 +18,9 @@ pub struct SaveData {
     #[serde(rename="LevelSetRecycleBin")]
     recycle_level_sets: LevelSets,
     #[serde(skip)]
-    pub map_stats: HashMap<MapCode, AreaModeStats>
+    pub map_stats: HashMap<MapCode, AreaModeStats>,
+    #[serde(skip)]
+    pub levels: HashMap<String, Vec<MapCode>>,
 }
 
 impl SaveData {
@@ -35,44 +37,43 @@ impl SaveData {
             level_sets: LevelSets::default(),
             recycle_level_sets: LevelSets::default(),
             map_stats: HashMap::new(),
+            levels: HashMap::new(),
         }
     }
     fn build_map_stats(&mut self) {
         self.map_stats.clear();
+        self.levels.clear();
         for area in self.areas.area_stats.iter() {
             for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
-                self.map_stats.insert(
-                    MapCode {
-                        level: "Celeste".to_string(),
-                        sid: area.sid.clone(),
-                        side: i,
-                    },
-                    mode.clone());
+                let code = MapCode {
+                    sid: area.sid.clone(),
+                    side: i,
+                };
+                self.levels.entry("Celeste".into()).or_insert(Vec::new()).push(code.clone());
+                self.map_stats.insert(code, mode.clone());
             }
         }
         for level in self.level_sets.level_set_stats.iter() {
             for area in level.areas.area_stats.iter() {
                 for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
-                    self.map_stats.insert(
-                        MapCode {
-                            level: level.name.to_string(),
-                            sid: area.sid.clone(),
-                            side: i,
-                        },
-                        mode.clone());
+                    let code = MapCode {
+                        sid: area.sid.clone(),
+                        side: i,
+                    };
+                    self.levels.entry(level.name.clone()).or_insert(Vec::new()).push(code.clone());
+                    self.map_stats.insert(code, mode.clone());
                 }
             }
         }
         for level in self.recycle_level_sets.level_set_stats.iter() {
             for area in level.areas.area_stats.iter() {
                 for (i, mode) in area.modes.area_mode_stats.iter().enumerate() {
-                    self.map_stats.insert(
-                        MapCode {
-                            level: level.name.to_string(),
-                            sid: area.sid.clone(),
-                            side: i,
-                        },
-                        mode.clone());
+                    let code = MapCode {
+                        sid: area.sid.clone(),
+                        side: i,
+                    };
+                    self.levels.entry(level.name.clone()).or_insert(Vec::new()).push(code.clone());
+                    self.map_stats.insert(code, mode.clone());
                 }
             }
         }
@@ -100,6 +101,11 @@ impl SaveData {
                 self.map_stats.insert(code, stats);
             }
         }
+        right.levels.into_iter().for_each(|(k, mut v)| {
+            self.levels.entry(k.clone())
+                .or_insert(vec![])
+                .append(&mut v);
+        });
     }
 
     pub fn total_strawberries(&self) -> usize {
@@ -109,7 +115,6 @@ impl SaveData {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct MapCode {
-    pub level: String,
     pub sid: String,
     pub side: usize,
 }

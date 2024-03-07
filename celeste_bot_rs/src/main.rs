@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, update, rescue, unknown)]
+#[commands(load, update, rescue, unknown, fetch_maps)]
 struct General;
 
 
@@ -269,6 +269,26 @@ async fn main() {
     if let Err(why) = client.start().await {
         println!("Client error: {:?}", why);
     }
+}
+
+async fn update_maps_yaml(ctx: &Context, msg: &Message) -> CommandResult {
+    let mut data = ctx.data.write().await;
+    let url = "https://raw.githubusercontent.com/niuez/celeste_data/main/maps.yaml";
+    let body = reqwest::get(url)
+        .await?
+        .text()
+        .await?;
+    let game_data = GameData::from_str(&body).unwrap();
+    data.insert::<GameDataStore>(Arc::new(RwLock::new(game_data)));
+    msg.channel_id.say(&ctx.http, format!("update complete")).await?;
+    Ok(())
+}
+
+#[command]
+async fn fetch_maps(ctx: &Context, msg: &Message) -> CommandResult {
+    update_maps_yaml(ctx, msg).await
+        .map_err(|e| format!("fetch failed {:?}", e))?;
+    Ok(())
 }
 
 
@@ -534,7 +554,6 @@ async fn rescue(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
         for (name, file) in ans_files {
             files.push((name, tokio::fs::File::open(file.path()).await?));
         }
-        eprintln!("files {:?}", files);
         msg.channel_id.send_message(&ctx, |m| {
             for (name, file) in files.iter() {
                 m.add_file(AttachmentType::File {
@@ -568,9 +587,9 @@ async fn unknown(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult 
         let savedata = savedata;
         let known_levels: HashSet<_> = game_data.levels().map(|s| s.level.clone()).collect();
         let mut unknown_levels = HashSet::new();
-        for map in savedata.map_stats.keys() {
-            if !known_levels.contains(&map.level) {
-                unknown_levels.insert(map.level.clone());
+        for level in savedata.levels.keys() {
+            if !known_levels.contains(level) {
+                unknown_levels.insert(level.clone());
             }
         }
         if let Ok(level) = args.single::<String>() {
@@ -583,8 +602,8 @@ async fn unknown(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult 
                     let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
                         .map_err(|e| format!("cant create tokio file {:?}", e))?;
                     tokio_file.write(format!("- level: {}\n  name: ''\n", level).as_bytes()).await?;
-                    for (map_code, _) in savedata.map_stats.iter() {
-                        if map_code.level == level && map_code.side == 0 {
+                    for map_code in savedata.levels[&level].iter() {
+                        if map_code.side == 0 {
                             tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
                             tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
                             tokio_file.write(format!("        en: ''\n")               .as_bytes()).await?;

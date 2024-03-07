@@ -10,6 +10,7 @@ text-tables = "0.3.1"
 tempfile = "3"
 celeste_visualizer = { path="../celeste_visualizer" }
 celeste_savefile_db = { path="../celeste_savefile_db" }
+reqwest = "0.11.24"
 
 
 [dependencies.serenity]

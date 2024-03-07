@@ -20,7 +20,7 @@ pub struct SaveData {
     #[serde(skip)]
     pub map_stats: HashMap<MapCode, AreaModeStats>,
     #[serde(skip)]
-    pub levels: HashMap<String, Vec<MapCode>>,
+    pub levels: HashMap<String, HashSet<MapCode>>,
 }
 
 impl SaveData {
@@ -49,7 +49,7 @@ impl SaveData {
                     sid: area.sid.clone(),
                     side: i,
                 };
-                self.levels.entry("Celeste".into()).or_insert(Vec::new()).push(code.clone());
+                self.levels.entry("Celeste".into()).or_insert(HashSet::new()).insert(code.clone());
                 self.map_stats.insert(code, mode.clone());
             }
         }
@@ -60,7 +60,7 @@ impl SaveData {
                         sid: area.sid.clone(),
                         side: i,
                     };
-                    self.levels.entry(level.name.clone()).or_insert(Vec::new()).push(code.clone());
+                    self.levels.entry(level.name.clone()).or_insert(HashSet::new()).insert(code.clone());
                     self.map_stats.insert(code, mode.clone());
                 }
             }
@@ -72,7 +72,7 @@ impl SaveData {
                         sid: area.sid.clone(),
                         side: i,
                     };
-                    self.levels.entry(level.name.clone()).or_insert(Vec::new()).push(code.clone());
+                    self.levels.entry(level.name.clone()).or_insert(HashSet::new()).insert(code.clone());
                     self.map_stats.insert(code, mode.clone());
                 }
             }
@@ -101,10 +101,10 @@ impl SaveData {
                 self.map_stats.insert(code, stats);
             }
         }
-        right.levels.into_iter().for_each(|(k, mut v)| {
-            self.levels.entry(k.clone())
-                .or_insert(vec![])
-                .append(&mut v);
+        right.levels.into_iter().for_each(|(k, v)| {
+            let v2 = self.levels.entry(k.clone())
+                .or_insert(HashSet::new());
+            *v2 = v2.union(&v).cloned().collect();
         });
     }
 

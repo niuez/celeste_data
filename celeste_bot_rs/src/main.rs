@@ -30,7 +30,7 @@ use serenity::framework::standard::{
 };
 use serenity::http::Http;
 use serenity::model::application::interaction::InteractionResponseType;
-use serenity::model::application::component::ButtonStyle;
+use serenity::model::application::component::{ButtonStyle, InputTextStyle};
 use serenity::model::channel::{Channel, Message, AttachmentType};
 use serenity::model::gateway::{GatewayIntents, Ready};
 use serenity::model::id::UserId;
@@ -140,14 +140,14 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, about, update, template, chmax)]
+#[commands(load, update, rescue, unknown)]
 struct General;
 
 
 use celeste_save_data_rs::save_data::SaveData;
 use celeste_save_data_rs::map_data::GameData;
 use celeste_visualizer::generate_png;
-use celeste_db_rs::CelesteDB;
+use celeste_savefile_db::*;
 use celeste_visualizer::diff::generate_diff_png;
 
 struct GameDataStore;
@@ -159,7 +159,7 @@ impl TypeMapKey for GameDataStore {
 struct CelesteDBStore;
 
 impl TypeMapKey for CelesteDBStore {
-    type Value = Arc<RwLock<CelesteDB>>;
+    type Value = Arc<RwLock<CelesteSavefileDB>>;
 }
 
 #[tokio::main]
@@ -262,7 +262,7 @@ async fn main() {
         let game_data = GameData::from_str(&yml).unwrap();
         data.insert::<GameDataStore>(Arc::new(RwLock::new(game_data)));
 
-        let db = CelesteDB::new().await.unwrap();
+        let db = CelesteSavefileDB::new().await.unwrap();
         data.insert::<CelesteDBStore>(Arc::new(RwLock::new(db)));
     }
 
@@ -272,8 +272,8 @@ async fn main() {
 }
 
 
-async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
-    let mut save_data = None;
+async fn check_save_data(msg: &Message) -> Result<HashMap<String, (SaveData, Savefile)>, String> {
+    let mut map = HashMap::new();
     for attachment in msg.attachments.iter() {
         match attachment.download().await {
             Err(why) => {
@@ -282,17 +282,21 @@ async fn check_save_data(msg: &Message) -> Result<SaveData, String> {
             Ok(data) => {
                 let xml = String::from_utf8(data).map_err(|e| format!("from_utf8 error {:?}", e))?;
                 let now_data = SaveData::from_str(&xml)?;
-                save_data = match save_data {
-                    None => Some(now_data),
-                    Some(mut data) => {
-                        data.merge(now_data);
-                        Some(data)
-                    }
-                }
+                let savefile = Savefile {
+                    discord_id: msg.author.id.to_string(),
+                    filename: attachment.filename.clone(),
+                    xml,
+                };
+                map.insert(attachment.filename.clone(), (now_data, savefile));
             }
         }
     }
-    save_data.ok_or_else(|| "no attachments".to_string())
+    if map.is_empty() {
+        Err("no attachments".to_string())
+    }
+    else {
+        Ok(map)
+    }
 }
 
 async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> CommandResult {
@@ -300,7 +304,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
     //table.push(("Chapter", "TotalStrawberries", "Completed", "SingleRunCompleted", "FullClear", "Deaths", "TimePlayed", "BestTime", "BestFullClearTime", "BestDashes", "BestDeaths", "HeartGem"));
     table.push(vec!["Chapter".to_string(), "BestTime".to_string(), "Best/Deaths".to_string(), "Strawberries".to_string()]);
     let sides = vec!["A", "B", "C"];
-    let m = {
+    let mut m = {
         let levels = {
             let data_read = ctx.data.read().await;
             let game_data_lock = data_read.get::<GameDataStore>()
@@ -394,103 +398,15 @@ async fn load(ctx: &Context, msg: &Message) -> CommandResult {
         let db_lock = data_read.get::<CelesteDBStore>()
             .expect("Expect CelesteDBStore in TypeMap").clone();
         let db = db_lock.read().await;
-        db.get_save_data(&game_data, &discord_id).await
-            .map_err(|e| format!("cant get data from db {:?}", e))?
+        let savefiles = db.get_savefiles(&discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?;
+        let mut save_data = SaveData::new();
+        for sf in savefiles {
+            save_data.merge(SaveData::from_str(&sf.xml)?);
+        }
+        save_data
     };
     load_data_dialog(ctx, msg, save_data).await?;
-    Ok(())
-}
-
-#[command]
-async fn about(ctx: &Context, msg: &Message) -> CommandResult {
-    match check_save_data(msg).await {
-        Err(why) => {
-            msg.channel_id.say(&ctx.http, why).await?;
-        }
-        Ok(save_data) => {
-            load_data_dialog(ctx, msg, save_data).await?;
-        }
-    }
-    Ok(())
-}
-
-#[command]
-async fn chmax(ctx: &Context, msg: &Message) -> CommandResult {
-    let discord_id = msg.author.id.to_string();
-    match check_save_data(msg).await {
-        Err(why) => {
-            msg.channel_id.say(&ctx.http, why).await?;
-        }
-        Ok(mut after) => {
-            let png_diff_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
-            {
-                let data_read = ctx.data.read().await;
-                let game_data_lock = data_read.get::<GameDataStore>()
-                    .expect("Expect GameDataStore in TypeMap").clone();
-                let game_data = game_data_lock.read().await;
-                let db_lock = data_read.get::<CelesteDBStore>()
-                    .expect("Expect CelesteDBStore in TypeMap").clone();
-                let db = db_lock.read().await;
-                let before = db.get_save_data(&game_data, &discord_id).await
-                    .map_err(|e| format!("cant get data from db {:?}", e))?;
-                after.merge(before.clone());
-                generate_diff_png(&game_data, &before, &after, png_diff_file.path(), "en")?;
-            };
-            let tokio_diff_file = tokio::fs::File::open(png_diff_file.path()).await
-                .map_err(|e| format!("cant create tokio file {:?}", e))?;
-            let m = {
-                msg.channel_id.send_message(&ctx, |m| {
-                    m.add_file(AttachmentType::File {
-                        file: &tokio_diff_file,
-                        filename: format!("{}_diff.png", msg.author),
-                    });
-                    m.content("select").components(|c| {
-                        c.create_action_row(|row| {
-                            row.create_button(|b| {
-                                b.custom_id("apply");
-                                b.label("apply");
-                                b.style(ButtonStyle::Primary)
-                            });
-                            row.create_button(|b| {
-                                b.custom_id("dismiss");
-                                b.label("dismiss");
-                                b.style(ButtonStyle::Secondary)
-                            })
-                        })
-                    })
-                })
-            };
-            let m = m.await.unwrap();
-            let interaction = match m.await_component_interaction(&ctx)
-                .author_id(msg.author.id)
-                .timeout(std::time::Duration::from_secs(30))
-                .await {
-                    Some(x) => x,
-                    None => {
-                        m.reply(&ctx, "Timed out").await.unwrap();
-                        return Ok(());
-                }
-            };
-            let selected_button = interaction.data.custom_id.clone();
-
-            if selected_button == "apply" {
-                {
-                    let data_read = ctx.data.read().await;
-                    let game_data_lock = data_read.get::<GameDataStore>()
-                        .expect("Expect GameDataStore in TypeMap").clone();
-                    let game_data = game_data_lock.read().await;
-                    let db_lock = data_read.get::<CelesteDBStore>()
-                        .expect("Expect CelesteDBStore in TypeMap").clone();
-                    let db = db_lock.read().await;
-                    db.update_record(&after, &game_data, &discord_id).await?;
-                }
-                m.reply(&ctx, "applied").await?;
-            }
-            else {
-                m.reply(&ctx, "dismissed").await?;
-            }
-        }
-    }
     Ok(())
 }
 
@@ -501,7 +417,7 @@ async fn update(ctx: &Context, msg: &Message) -> CommandResult {
         Err(why) => {
             msg.channel_id.say(&ctx.http, why).await?;
         }
-        Ok(after) => {
+        Ok(new_savefiles) => {
             let png_diff_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
             {
                 let data_read = ctx.data.read().await;
@@ -511,8 +427,21 @@ async fn update(ctx: &Context, msg: &Message) -> CommandResult {
                 let db_lock = data_read.get::<CelesteDBStore>()
                     .expect("Expect CelesteDBStore in TypeMap").clone();
                 let db = db_lock.read().await;
-                let before = db.get_save_data(&game_data, &discord_id).await
+                let now_savefiles = db.get_savefiles(&discord_id).await
                     .map_err(|e| format!("cant get data from db {:?}", e))?;
+
+                let mut before = SaveData::new();
+                let mut after = SaveData::new();
+                for sf in now_savefiles {
+                    let data = SaveData::from_str(&sf.xml)?;
+                    if !new_savefiles.contains_key(&sf.filename) {
+                        after.merge(data.clone());
+                    }
+                    before.merge(data);
+                }
+                for e in new_savefiles.values() {
+                    after.merge(e.0.clone())
+                }
                 generate_diff_png(&game_data, &before, &after, png_diff_file.path(), "en")?;
             };
             let tokio_diff_file = tokio::fs::File::open(png_diff_file.path()).await
@@ -561,7 +490,10 @@ async fn update(ctx: &Context, msg: &Message) -> CommandResult {
                     let db_lock = data_read.get::<CelesteDBStore>()
                         .expect("Expect CelesteDBStore in TypeMap").clone();
                     let db = db_lock.read().await;
-                    db.update_record(&after, &game_data, &discord_id).await?;
+                    for (filename, (_, sf)) in new_savefiles.into_iter() {
+                        db.update_savefile(sf).await
+                            .map_err(|e| format!("cant save {:?}", e))?;
+                    }
                 }
                 m.reply(&ctx, "applied").await?;
             }
@@ -575,37 +507,107 @@ async fn update(ctx: &Context, msg: &Message) -> CommandResult {
 use tokio::io::{self, AsyncWriteExt};
 
 #[command]
-async fn template(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
+async fn rescue(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
     let discord_id = msg.author.id.to_string();
-    let level = args.single::<String>()?;
-    match check_save_data(msg).await {
-        Err(why) => {
-            msg.channel_id.say(&ctx.http, why).await?;
-        }
-        Ok(after) => {
+    let mut ans_files = vec![];
+    {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        let now_savefiles = db.get_savefiles(&discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?;
+
+        for sf in now_savefiles {
             let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
-            {
-                let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
-                    .map_err(|e| format!("cant create tokio file {:?}", e))?;
-                tokio_file.write(format!("- level: {}\n  name: ''\n", level).as_bytes()).await?;
-                for (map_code, _) in after.map_stats.iter() {
-                    if map_code.level == level {
-                        tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
-                        tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
-                        tokio_file.write(format!("        en: ''\n")               .as_bytes()).await?;
-                        tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+            let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                .map_err(|e| format!("cant create tokio file {:?}", e))?;
+            tokio_file.write_all(sf.xml.as_bytes()).await?;
+            ans_files.push((sf.filename, ans_file));
+        }
+    }
+    {
+        let mut files = vec![];
+        for (name, file) in ans_files {
+            files.push((name, tokio::fs::File::open(file.path()).await?));
+        }
+        eprintln!("files {:?}", files);
+        msg.channel_id.send_message(&ctx, |m| {
+            for (name, file) in files.iter() {
+                m.add_file(AttachmentType::File {
+                    file: &file,
+                    filename: name.clone(),
+                });
+            }
+            m
+        }).await?;
+    }
+    Ok(())
+}
+
+#[command]
+async fn unknown(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        let now_savefiles = db.get_savefiles(&discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?;
+        let mut savedata = SaveData::new();
+        for sf in now_savefiles {
+            savedata.merge(SaveData::from_str(&sf.xml)?);
+        }
+        let savedata = savedata;
+        let known_levels: HashSet<_> = game_data.levels().map(|s| s.level.clone()).collect();
+        let mut unknown_levels = HashSet::new();
+        for map in savedata.map_stats.keys() {
+            if !known_levels.contains(&map.level) {
+                unknown_levels.insert(map.level.clone());
+            }
+        }
+        if let Ok(level) = args.single::<String>() {
+            if !unknown_levels.contains(&level) {
+                msg.channel_id.say(&ctx.http, "not found").await?;
+            }
+            else {
+                let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+                {
+                    let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                        .map_err(|e| format!("cant create tokio file {:?}", e))?;
+                    tokio_file.write(format!("- level: {}\n  name: ''\n", level).as_bytes()).await?;
+                    for (map_code, _) in savedata.map_stats.iter() {
+                        if map_code.level == level && map_code.side == 0 {
+                            tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
+                            tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
+                            tokio_file.write(format!("        en: ''\n")               .as_bytes()).await?;
+                            tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                        }
                     }
                 }
+                {
+                    let tokio_file = tokio::fs::File::open(ans_file.path()).await?;
+                    msg.channel_id.send_message(&ctx, |m| {
+                        m.add_file(AttachmentType::File {
+                            file: &tokio_file,
+                            filename: format!("{}.yaml", level),
+                        })
+                    }).await?;
+                }
             }
-            {
-                let tokio_file = tokio::fs::File::open(ans_file.path()).await?;
-                msg.channel_id.send_message(&ctx, |m| {
-                    m.add_file(AttachmentType::File {
-                        file: &tokio_file,
-                        filename: format!("{}.yaml", level),
-                    })
-                }).await?;
-            }
+        }
+        else {
+            let mut levels = unknown_levels.into_iter().collect::<Vec<_>>();
+            levels.sort();
+            let message = levels.join("\n");
+            msg.channel_id.say(&ctx.http, message).await?;
         }
     }
     Ok(())

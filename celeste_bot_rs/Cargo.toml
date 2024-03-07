@@ -9,7 +9,8 @@ edition = "2021"
 text-tables = "0.3.1"
 tempfile = "3"
 celeste_visualizer = { path="../celeste_visualizer" }
-celeste_db_rs = { path="../celeste_db_rs" }
+celeste_savefile_db = { path="../celeste_savefile_db" }
+
 
 [dependencies.serenity]
 version = "0.11.5"

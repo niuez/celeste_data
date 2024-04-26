@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, update, rescue, unknown, fetch_maps)]
+#[commands(load, update, rescue, delete_savefiles_i_know_what_i_do, unknown, fetch_maps)]
 struct General;
 
 
@@ -563,6 +563,23 @@ async fn rescue(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
             }
             m
         }).await?;
+    }
+    Ok(())
+}
+
+#[command]
+async fn delete_savefiles_i_know_what_i_do(ctx: &Context, msg: &Message) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        db.delete_savefiles(&discord_id).await
+            .map_err(|e| format!("cant delete data from db {:?}", e))?;
     }
     Ok(())
 }

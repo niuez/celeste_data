@@ -45,6 +45,16 @@ impl CelesteSavefileDB {
         }
         Ok(())
     }
+    pub async fn delete_savefiles(&self, discord_id: &str) -> Result<(), String> {
+        let mut cursor = self.gridfs.find(doc!{ "metadata.discord_id": discord_id }, None)
+            .await.map_err(|e| format!("cant find {:?}", e))?;
+        while let Some(result) = cursor.try_next()
+            .await.map_err(|e| format!("cant try next {:?}", e))? {
+                self.gridfs.delete(result.id)
+                .await.map_err(|e| format!("cant delete: {:?}", e))?;
+        }
+        Ok(())
+    }
 
     pub async fn get_savefiles(&self, discord_id: &str) -> Result<Vec<Savefile>, String> {
         let mut cursor = self.gridfs.find(doc!{ "metadata.discord_id": discord_id }, None)

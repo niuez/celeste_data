@@ -1322,3 +1322,109 @@
         en: 'Passionfruit Pantheon'
         ja: 'パッションフルーツ万神殿'
       sides: [0]
+- level: ChineseNewYear2024/1-Maps
+  name: 'ChineseNewYear2024/1-Maps'
+    - sid: 'ChineseNewYear2024/1-Maps/DX3906I'
+      name:
+        en: 'Red Horizon'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/hoshiyakimu'
+      name:
+        en: 'Starry Summit'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireMADWMY'
+      name:
+        en: 'Terminal'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/iceCream'
+      name:
+        en: 'Hazy Space'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/RoCas'
+      name:
+        en: 'Dream in Rhythm'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/ZZ-HeartSide'
+      name:
+        en: 'Kaleidoscope through the Art'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/rd_cny_gf'
+      name:
+        en: 'Gravity Flow'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/AuraMS'
+      name:
+        en: 'Madeline: Shovel'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/youziAfterain'
+      name:
+        en: 'After Rain'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/rifsAcetone'
+      name:
+        en: 'Covered with dust'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/Underdragon1'
+      name:
+        en: 'Bloom Wanderer'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/DLK'
+      name:
+        en: 'Reality - 209'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/ahayo3'
+      name:
+        en: 'City in Silence'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/LittleV5'
+      name:
+        en: 'Sailing Star Phantom'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireGDDN'
+      name:
+        en: 'Game Development Department'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/AuraMP'
+      name:
+        en: 'Momentum Purgatory'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/bitsxiangsu'
+      name:
+        en: 'Ruins of Temple'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/B612'
+      name:
+        en: 'B612'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireYHS'
+      name:
+        en: 'Afterglow Summit'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/yanshi'
+      name:
+        en: 'Reverse Unreversed'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireFR'
+      name:
+        en: 'FR-C2'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/ShadowRo'
+      name:
+        en: 'Season Traveller'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/fengchen'
+      name:
+        en: 'Dream Ridge'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireSTLR'
+      name:
+        en: 'Stardust Ruins'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/LittleV1'
+      name:
+        en: 'Blueberry Jelly Valley'
+      sides: [0]
+    - sid: 'ChineseNewYear2024/1-Maps/StarSapphireCyberDance'
+      name:
+        en: 'Cyber Roam'
+      sides: [0]

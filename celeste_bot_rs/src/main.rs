@@ -355,7 +355,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
                                 menu.options(|f| {
                                     for j in 0..25 {
                                         if i * 25 + j < levels.len() {
-                                            f.create_option(|o| o.label(levels[i * 25 + j].0.to_string()).value(levels[i * 25 + j].1.to_string()));
+                                            f.create_option(|o| o.label(levels[i * 25 + j].1.to_string()).value(levels[i * 25 + j].0.to_string()));
                                         }
                                     }
                                     f
@@ -385,7 +385,8 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
                     let game_data_lock = data_read.get::<GameDataStore>()
                         .expect("Expect GameDataStore in TypeMap").clone();
                     let game_data = game_data_lock.read().await;
-
+                    eprintln!("{}", selected_level);
+                    eprintln!("{:?}", game_data);
                     generate_png(&save_data, game_data.get_level_data(&selected_level).unwrap().maps(), png_file.path(), &selected_lang)
                         .map_err(|e| format!("cant generate png {:?}", e))?;
                 }

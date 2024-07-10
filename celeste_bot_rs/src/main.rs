@@ -278,6 +278,7 @@ async fn update_maps_yaml(ctx: &Context, msg: &Message) -> CommandResult {
         .await?
         .text()
         .await?;
+    eprintln!("{}", body);
     let game_data = GameData::from_str(&body).unwrap();
     data.insert::<GameDataStore>(Arc::new(RwLock::new(game_data)));
     msg.channel_id.say(&ctx.http, format!("update complete")).await?;
@@ -354,7 +355,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
                                 menu.options(|f| {
                                     for j in 0..25 {
                                         if i * 25 + j < levels.len() {
-                                            f.create_option(|o| o.label(levels[i].0.to_string()).value(levels[i].1.to_string()));
+                                            f.create_option(|o| o.label(levels[i * 25 + j].0.to_string()).value(levels[i * 25 + j].1.to_string()));
                                         }
                                     }
                                     f

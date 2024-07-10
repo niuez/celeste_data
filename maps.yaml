@@ -1429,3 +1429,49 @@
       name:
         en: 'Cyber Roam'
       sides: [0]
+- level: hardlist
+  name: 'hardlist'
+  maps:
+    - sid: 'MOCE/issy/MOCE_LXVI'
+      name:
+        en: 'MOCE // LXVI'
+      sides: [0]
+    - sid: 'GDDH/ARKEYIS'
+      name:
+        en: 'GDDH'
+      sides: [0]
+    - sid: 'MOCE/issy/MOCE_CPCL'
+      name:
+        en: 'MOCE // CPVL'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/ZZ-HeartSide'
+      name:
+        en: 'Passionfruit Pantheon'
+        ja: 'パッションフルーツ万神殿'
+      sides: [0]
+    - sid: 'RD/sbww/sbww'
+      name:
+        en: 'S. B. W. W.'
+      sides: [0]
+    - sid: 'SapphireDash/StarSapphire/Sapphire Dash'
+      name:
+        en: 'Sapphire Dash'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/maya'
+      name:
+        en: 'Pinball Purgatory'
+        ja: 'ピンボール煉獄'
+      sides: [0]
+    - sid: 'StrawberryJam2021/5-Grandmaster/Soloiini'
+      name:
+        en: 'The Solar Express'
+        ja: '太陽系特急列車'
+      sides: [0]
+    - sid: 'Rifs/Motu/MotuRemake'
+      name:
+        en: 'Moon of the Ultras'
+      sides: [0]
+    - sid: 'MoonRuins/1-moonruins'
+      name:
+        en: 'Darkmoon Ruins'
+      sides: [0]

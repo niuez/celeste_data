@@ -1324,6 +1324,7 @@
       sides: [0]
 - level: ChineseNewYear2024/1-Maps
   name: 'ChineseNewYear2024/1-Maps'
+  maps:
     - sid: 'ChineseNewYear2024/1-Maps/DX3906I'
       name:
         en: 'Red Horizon'

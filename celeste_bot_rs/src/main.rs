@@ -140,7 +140,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, update, rescue, delete_savefiles_i_know_what_i_do, unknown, fetch_maps)]
+#[commands(load, update, rescue, delete_savefiles_i_know_what_i_do, unknown, fetch_maps, find_english)]
 struct General;
 
 
@@ -333,7 +333,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
             game_data.levels().map(|s| (s.level.to_string(), s.name.to_string())).collect::<Vec<_>>()
         };
 
-        msg.channel_id.send_message(&ctx, |m| {
+        msg.channel_id.send_message(&ctx, move |m| {
             m.content("select").components(|c| {
                 c.create_action_row(|row| {
                     row.create_select_menu(|menu| {
@@ -345,18 +345,25 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
                         })
                     })
                 });
-                c.create_action_row(|row| {
-                    row.create_select_menu(|menu| {
-                        menu.custom_id("level_select");
-                        menu.placeholder("level");
-                        menu.options(|f| {
-                            for (level, name) in levels.into_iter() {
-                                f.create_option(|o| o.label(name.to_string()).value(level.to_string()));
-                            }
-                            f
-                        })
-                    })
-                })
+                for i in 0..4 {
+                    if i * 25 < levels.len() {
+                        c.create_action_row(|row| {
+                            row.create_select_menu(|menu| {
+                                menu.custom_id(format!("level_select{}", i));
+                                menu.placeholder("level");
+                                menu.options(|f| {
+                                    for j in 0..25 {
+                                        if i * 25 + j < levels.len() {
+                                            f.create_option(|o| o.label(levels[i].0.to_string()).value(levels[i].1.to_string()));
+                                        }
+                                    }
+                                    f
+                                })
+                            })
+                        });
+                    }
+                }
+                c
             })
         })
     };
@@ -368,7 +375,7 @@ async fn load_data_dialog(ctx: &Context, msg: &Message, save_data: SaveData) -> 
     {
         let mut selected_lang = "en".to_string();
         while let Some(interaction) = interaction_stream.next().await {
-            if interaction.data.custom_id == "level_select" {
+            if interaction.data.custom_id.strip_prefix("level_select").is_some() {
                 let selected_level = interaction.data.values[0].to_string();
 
                 let png_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
@@ -645,6 +652,108 @@ async fn unknown(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult 
             let message = levels.join("\n");
             msg.channel_id.say(&ctx.http, message).await?;
         }
+    }
+    Ok(())
+}
+
+
+#[command]
+async fn find_english(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        let now_savefiles = db.get_savefiles(&discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?;
+        let mut savedata = SaveData::new();
+        for sf in now_savefiles {
+            savedata.merge(SaveData::from_str(&sf.xml)?);
+        }
+        let savedata = savedata;
+        let known_levels: HashSet<_> = game_data.levels().map(|s| s.level.clone()).collect();
+        let mut unknown_levels = HashSet::new();
+        for level in savedata.levels.keys() {
+            if !known_levels.contains(level) {
+                unknown_levels.insert(level.clone());
+            }
+        }
+        let mut english_dist = HashMap::new();
+        for attachment in msg.attachments.iter() {
+            match attachment.download().await {
+                Err(why) => {
+                    Err(format!("download error {:?}", why))?
+                }
+                Ok(data) => {
+                    let english = String::from_utf8(data).map_err(|e| format!("from_utf8 error {:?}", e))?;
+                    let english = english.replace("=", "= ");
+                    let splits = english.lines()
+                        .filter(|s| !s.strip_prefix("#").is_some())
+                        .map(|s| s.split_whitespace().collect::<Vec<_>>())
+                        .flatten()
+                        .rev()
+                        .collect::<Vec<_>>();
+                    let mut now: Vec<String> = vec![];
+                    for s in splits {
+                        if let Some(key) = s.strip_suffix("=") {
+                            now.reverse();
+                            english_dist.insert(key.to_string(), now.join(" "));
+                            eprintln!("{} {}", key.to_string(), now.join(" "));
+                            now.clear();
+                        }
+                        else {
+                            now.push(s.to_string());
+                        }
+                    }
+                }
+            }
+        }
+
+        let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+        for unknown_level in unknown_levels {
+            let mut ok = true;
+            for map_code in savedata.levels[&unknown_level].iter() {
+                let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>();
+                eprintln!("{} -> {}", map_code.sid, key);
+                if let Some(value) = english_dist.get(key.as_str()) {
+                }
+                else {
+                    ok = false;
+                }
+            }
+            if ok {
+                {
+                    let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                        .map_err(|e| format!("cant create tokio file {:?}", e))?;
+                    tokio_file.write(format!("- level: {}\n  name: '{}'\n", unknown_level, unknown_level).as_bytes()).await?;
+                    for map_code in savedata.levels[&unknown_level].iter() {
+                        let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>();
+                        if map_code.side == 0 {
+                            tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
+                            tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
+                            tokio_file.write(format!("        en: '{}'\n", english_dist[key.as_str()])               .as_bytes()).await?;
+                            tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                        }
+                    }
+                }
+            }
+        }
+
+        {
+            let tokio_file = tokio::fs::File::open(ans_file.path()).await?;
+            msg.channel_id.send_message(&ctx, |m| {
+                m.add_file(AttachmentType::File {
+                    file: &tokio_file,
+                    filename: format!("maps.yaml"),
+                })
+            }).await?;
+        }
+
+
     }
     Ok(())
 }

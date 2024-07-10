@@ -1673,4 +1673,10 @@
       name:
         en: 'Meteor Shower'
       sides: [0]
-
+- level: WaterBite
+  name: 'WaterBite'
+  maps:
+    - sid: 'WaterBite/WaterBite'
+      name:
+        en: '|. . .\ WaterBite /. . .|'
+      sides: [0]

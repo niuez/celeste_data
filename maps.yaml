@@ -1475,3 +1475,202 @@
       name:
         en: 'Darkmoon Ruins'
       sides: [0]
+- level: ExpertContest2023/1-Submissions
+  name: 'ExpertContest2023'
+  maps:
+    - sid: 'ExpertContest2023/1-Submissions/godtier'
+      name:
+        en: 'GOD TIER'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Wolkenkrabber'
+      name:
+        en: 'Wolkenkrabber'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/lostintime'
+      name:
+        en: 'Lost In Time'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/EC2023'
+      name:
+        en: 'Under Pressure'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Chronosphere'
+      name:
+        en: 'Chronosphere'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/luma'
+      name:
+        en: 'Unstable Station'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/WalkOffRewind'
+      name:
+        en: 'Walk Off Rewind'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/cyber_lightspace'
+      name:
+        en: 'Neon Lightspace'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/neon'
+      name:
+        en: 'Neon Ascent'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Sand'
+      name:
+        en: 'Sand'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Cryogenic'
+      name:
+        en: 'Cryogenic'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Ellis'
+      name:
+        en: 'Old site two'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/sharethelight'
+      name:
+        en: 'Share The Light'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/admirer'
+      name:
+        en: 'Secret Admirer with Scarlet Eyes'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/new'
+      name:
+        en: '"Scraggly1''s Mechanic Mayhem"'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/scorchingprison'
+      name:
+        en: 'Antique Vignette'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/wasproom'
+      name:
+        en: 'The Wasp Room'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/observatory'
+      name:
+        en: 'Stellar Observatory'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/1-elevatedkeep'
+      name:
+        en: 'Elevated Keep'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/ABuffZucchinisCanyon'
+      name:
+        en: 'Boom Town'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/circleincircle'
+      name:
+        en: 'CircleInCircle'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Pinkish'
+      name:
+        en: 'Pinkish'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Jellyland'
+      name:
+        en: 'Stranded in Jellyland'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Plixona'
+      name:
+        en: 'Catastrophe'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/1'
+      name:
+        en: 'Nyan''s Apartment Complex'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/sky_kingdom'
+      name:
+        en: 'Kingdom to Heaven'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/SolitudeRain'
+      name:
+        en: 'Solitude Rain'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/duskiemoon'
+      name:
+        en: 'Windup Faraway'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/Theo_In_The_Box'
+      name:
+        en: 'Theo in the Shroom'
+      sides: [0]
+    - sid: 'ExpertContest2023/1-Submissions/bumpers'
+      name:
+        en: 'The Beta Project'
+      sides: [0]
+- level: ArchieCollab/1-Archie
+  name: 'ArchieCollab/1-Archie'
+  maps:
+    - sid: 'ArchieCollab/1-Archie/UntitledTheoMap'
+      name:
+        en: 'Untitled Theo Map'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/MadelineCanMove'
+      name:
+        en: 'Madeline Can Move!'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/LemonTemple'
+      name:
+        en: 'Lemon Temple'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/Mach6Point22'
+      name:
+        en: 'Mach 6.22'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/Sinew'
+      name:
+        en: 'Sinew'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/ShiverburnSpire'
+      name:
+        en: 'Shiverburn Spire'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/FireflyCavern'
+      name:
+        en: 'Firefly Cavern'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/StarryCliffside'
+      name:
+        en: 'Starry Cliffside'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/SanguineInsomnia'
+      name:
+        en: 'Sanguine Insomnia'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/FlippingFacility'
+      name:
+        en: 'Flipping Facility'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/AbbyAlley'
+      name:
+        en: 'Abby''s Alley'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/UltraflingUnderpass'
+      name:
+        en: 'Ultra Fling Underpass'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/TripleA'
+      name:
+        en: 'AAA'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/OverTheHills'
+      name:
+        en: 'Over The Hills'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/ForestRushB-side'
+      name:
+        en: 'Forest Rush B-side'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/AmericanHousingCrisis'
+      name:
+        en: 'The 2000''s American Housing Crisis'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/DrowsyDreamlandLikeTheAreaFromToontownCorporateClash'
+      name:
+        en: 'Drowsy Dreamland Like The Area From Toontown: Corporate Clash'
+      sides: [0]
+    - sid: 'ArchieCollab/1-Archie/MeteorShower'
+      name:
+        en: 'Meteor Shower'
+      sides: [0]
+

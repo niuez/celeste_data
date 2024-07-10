@@ -702,7 +702,7 @@ async fn find_english(ctx: &Context, msg: &Message, mut args: Args) -> CommandRe
                     for s in splits {
                         if let Some(key) = s.strip_suffix("=") {
                             now.reverse();
-                            english_dist.insert(key.to_string(), now.join(" "));
+                            english_dist.insert(key.to_uppercase().to_string(), now.join(" "));
                             eprintln!("{} {}", key.to_string(), now.join(" "));
                             now.clear();
                         }
@@ -715,29 +715,33 @@ async fn find_english(ctx: &Context, msg: &Message, mut args: Args) -> CommandRe
         }
 
         let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
-        for unknown_level in unknown_levels {
-            let mut ok = true;
-            for map_code in savedata.levels[&unknown_level].iter() {
-                let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>();
-                eprintln!("{} -> {}", map_code.sid, key);
-                if let Some(value) = english_dist.get(key.as_str()) {
+        {
+            let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                .map_err(|e| format!("cant create tokio file {:?}", e))?;
+            for unknown_level in unknown_levels {
+                let mut ok = true;
+                for map_code in savedata.levels[&unknown_level].iter() {
+                    let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>().to_uppercase();
+                    eprintln!("{} -> {}", map_code.sid, key);
+                    if let Some(value) = english_dist.get(key.as_str()) {
+                    }
+                    else {
+                        eprintln!("{}: cant find {}", unknown_level, key);
+                        ok = false;
+                    }
                 }
-                else {
-                    ok = false;
-                }
-            }
-            if ok {
-                {
-                    let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
-                        .map_err(|e| format!("cant create tokio file {:?}", e))?;
-                    tokio_file.write(format!("- level: {}\n  name: '{}'\n  maps:\n", unknown_level, unknown_level).as_bytes()).await?;
-                    for map_code in savedata.levels[&unknown_level].iter() {
-                        let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>();
-                        if map_code.side == 0 {
-                            tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
-                            tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
-                            tokio_file.write(format!("        en: '{}'\n", english_dist[key.as_str()])               .as_bytes()).await?;
-                            tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                if ok {
+                    eprintln!("find! {}", unknown_level);
+                    {
+                        tokio_file.write(format!("- level: {}\n  name: '{}'\n  maps:\n", unknown_level, unknown_level).as_bytes()).await?;
+                        for map_code in savedata.levels[&unknown_level].iter() {
+                            let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>().to_uppercase();
+                            if map_code.side == 0 {
+                                tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
+                                tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
+                                tokio_file.write(format!("        en: '{}'\n", english_dist[key.as_str()])               .as_bytes()).await?;
+                                tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                            }
                         }
                     }
                 }

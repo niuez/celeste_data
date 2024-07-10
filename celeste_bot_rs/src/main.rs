@@ -729,7 +729,7 @@ async fn find_english(ctx: &Context, msg: &Message, mut args: Args) -> CommandRe
                 {
                     let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
                         .map_err(|e| format!("cant create tokio file {:?}", e))?;
-                    tokio_file.write(format!("- level: {}\n  name: '{}'\n", unknown_level, unknown_level).as_bytes()).await?;
+                    tokio_file.write(format!("- level: {}\n  name: '{}'\n  maps:\n", unknown_level, unknown_level).as_bytes()).await?;
                     for map_code in savedata.levels[&unknown_level].iter() {
                         let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>();
                         if map_code.side == 0 {

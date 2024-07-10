@@ -1680,3 +1680,62 @@
       name:
         en: '|. . .\ WaterBite /. . .|'
       sides: [0]
+- level: EndGameContest2021/1-Submissions
+  name: 'EndGameContest'
+  maps:
+    - sid: 'EndGameContest2021/1-Submissions/Quinnigan'
+      name:
+        en: 'Cyclonic Firmament'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Toto00'
+      name:
+        en: 'The Chamber'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Nyan'
+      name:
+        en: 'Torrential'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/ABuffZucchini'
+      name:
+        en: 'Digital Hell'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/jadeturtle'
+      name:
+        en: 'Apotheosis'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Jan'
+      name:
+        en: 'celeste'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/oknano'
+      name:
+        en: 'CHAOS ASSEMBLY'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/tobyaaa'
+      name:
+        en: 'Five Cloud Jaunt'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/LostInNowhere'
+      name:
+        en: 'Banach Space'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Yosh'
+      name:
+        en: 'Rift Fortress'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Worldwaker2'
+      name:
+        en: 'Open Sea'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/xolimono'
+      name:
+        en: 'Royal Gardens by Night'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/moladan'
+      name:
+        en: 'Song of Springs'
+      sides: [0]
+    - sid: 'EndGameContest2021/1-Submissions/Appels'
+      name:
+        en: 'Temple on the Earth'
+      sides: [0]

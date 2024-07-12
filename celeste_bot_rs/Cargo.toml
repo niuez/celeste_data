@@ -11,6 +11,7 @@ tempfile = "3"
 celeste_visualizer = { path="../celeste_visualizer" }
 celeste_savefile_db = { path="../celeste_savefile_db" }
 reqwest = "0.11.24"
+zip = "2.1.3"
 
 
 [dependencies.serenity]

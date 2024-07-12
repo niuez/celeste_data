@@ -11,6 +11,7 @@
 use std::collections::{HashMap, HashSet};
 use std::env;
 use std::fmt::Write;
+use std::io::Read;
 use std::sync::Arc;
 
 use serenity::async_trait;
@@ -140,7 +141,7 @@ fn _dispatch_error_no_macro<'fut>(
 }
 
 #[group]
-#[commands(load, update, rescue, delete_savefiles_i_know_what_i_do, unknown, fetch_maps, find_english)]
+#[commands(load, update, rescue, delete_savefiles_i_know_what_i_do, unknown, fetch_maps, find_english, find_zip)]
 struct General;
 
 
@@ -713,6 +714,121 @@ async fn find_english(ctx: &Context, msg: &Message, mut args: Args) -> CommandRe
                     }
                 }
             }
+        }
+
+        let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+        {
+            let mut tokio_file = tokio::fs::File::create(ans_file.path()).await
+                .map_err(|e| format!("cant create tokio file {:?}", e))?;
+            for unknown_level in unknown_levels {
+                let mut ok = true;
+                for map_code in savedata.levels[&unknown_level].iter() {
+                    let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>().to_uppercase();
+                    eprintln!("{} -> {}", map_code.sid, key);
+                    if let Some(value) = english_dist.get(key.as_str()) {
+                    }
+                    else {
+                        eprintln!("{}: cant find {}", unknown_level, key);
+                        ok = false;
+                    }
+                }
+                if ok {
+                    eprintln!("find! {}", unknown_level);
+                    {
+                        tokio_file.write(format!("- level: {}\n  name: '{}'\n  maps:\n", unknown_level, unknown_level).as_bytes()).await?;
+                        for map_code in savedata.levels[&unknown_level].iter() {
+                            let key = map_code.sid.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect::<String>().to_uppercase();
+                            if map_code.side == 0 {
+                                tokio_file.write(format!("    - sid: '{}'\n", map_code.sid).as_bytes()).await?;
+                                tokio_file.write(format!("      name:\n")                  .as_bytes()).await?;
+                                tokio_file.write(format!("        en: '{}'\n", english_dist[key.as_str()])               .as_bytes()).await?;
+                                tokio_file.write(format!("      sides: [0]\n")             .as_bytes()).await?;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        {
+            let tokio_file = tokio::fs::File::open(ans_file.path()).await?;
+            msg.channel_id.send_message(&ctx, |m| {
+                m.add_file(AttachmentType::File {
+                    file: &tokio_file,
+                    filename: format!("maps.yaml"),
+                })
+            }).await?;
+        }
+
+
+    }
+    Ok(())
+}
+
+
+#[command]
+async fn find_zip(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult {
+    let discord_id = msg.author.id.to_string();
+    {
+        let data_read = ctx.data.read().await;
+        let game_data_lock = data_read.get::<GameDataStore>()
+            .expect("Expect GameDataStore in TypeMap").clone();
+        let game_data = game_data_lock.read().await;
+        let db_lock = data_read.get::<CelesteDBStore>()
+            .expect("Expect CelesteDBStore in TypeMap").clone();
+        let db = db_lock.read().await;
+        let now_savefiles = db.get_savefiles(&discord_id).await
+            .map_err(|e| format!("cant get data from db {:?}", e))?;
+        let mut savedata = SaveData::new();
+        for sf in now_savefiles {
+            savedata.merge(SaveData::from_str(&sf.xml)?);
+        }
+        let savedata = savedata;
+        let known_levels: HashSet<_> = game_data.levels().map(|s| s.level.clone()).collect();
+        let mut unknown_levels = HashSet::new();
+        for level in savedata.levels.keys() {
+            if !known_levels.contains(level) {
+                unknown_levels.insert(level.clone());
+            }
+        }
+        let mut english_dist = HashMap::new();
+
+        if let Ok(url) = args.single::<String>() {
+
+            let mut zip_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+
+            msg.reply(&ctx, "Downloading...").await.unwrap();
+            let bytes = reqwest::get(url)
+                .await?
+                .bytes()
+                .await?;
+            msg.reply(&ctx, "Downloaded!").await.unwrap();
+            let mut cur = std::io::Cursor::new(bytes);
+            std::io::copy(&mut cur, &mut zip_file)?;
+            let mut zip = zip::ZipArchive::new(zip_file)?;
+            if let Ok(mut file) = zip.by_name("Dialog/English.txt") {
+                let mut english = String::new();
+                file.read_to_string(&mut english)?;
+                let english = english.replace("=", "= ");
+                let splits = english.lines()
+                    .filter(|s| !s.strip_prefix("#").is_some())
+                    .map(|s| s.split_whitespace().collect::<Vec<_>>())
+                    .flatten()
+                    .rev()
+                    .collect::<Vec<_>>();
+                let mut now: Vec<String> = vec![];
+                for s in splits {
+                    if let Some(key) = s.strip_suffix("=") {
+                        now.reverse();
+                        english_dist.insert(key.to_uppercase().to_string(), now.join(" "));
+                        eprintln!("{} {}", key.to_string(), now.join(" "));
+                        now.clear();
+                    }
+                    else {
+                        now.push(s.to_string());
+                    }
+                }
+            };
         }
 
         let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;

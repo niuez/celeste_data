@@ -793,42 +793,42 @@ async fn find_zip(ctx: &Context, msg: &Message, mut args: Args) -> CommandResult
         }
         let mut english_dist = HashMap::new();
 
-        if let Ok(url) = args.single::<String>() {
-
-            let mut zip_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
-
-            msg.reply(&ctx, "Downloading...").await.unwrap();
-            let bytes = reqwest::get(url)
-                .await?
-                .bytes()
-                .await?;
-            msg.reply(&ctx, "Downloaded!").await.unwrap();
-            let mut cur = std::io::Cursor::new(bytes);
-            std::io::copy(&mut cur, &mut zip_file)?;
-            let mut zip = zip::ZipArchive::new(zip_file)?;
-            if let Ok(mut file) = zip.by_name("Dialog/English.txt") {
-                let mut english = String::new();
-                file.read_to_string(&mut english)?;
-                let english = english.replace("=", "= ");
-                let splits = english.lines()
-                    .filter(|s| !s.strip_prefix("#").is_some())
-                    .map(|s| s.split_whitespace().collect::<Vec<_>>())
-                    .flatten()
-                    .rev()
-                    .collect::<Vec<_>>();
-                let mut now: Vec<String> = vec![];
-                for s in splits {
-                    if let Some(key) = s.strip_suffix("=") {
-                        now.reverse();
-                        english_dist.insert(key.to_uppercase().to_string(), now.join(" "));
-                        eprintln!("{} {}", key.to_string(), now.join(" "));
-                        now.clear();
+        if let Ok(urls) = args.single::<String>() {
+            for url in urls.split_whitespace() {
+                let mut zip_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
+                msg.channel_id.say(&ctx.http, format!("Downloading... {}", url)).await?;
+                let bytes = reqwest::get(url)
+                    .await?
+                    .bytes()
+                    .await?;
+                msg.channel_id.say(&ctx.http, format!("Downloaded!")).await?;
+                let mut cur = std::io::Cursor::new(bytes);
+                std::io::copy(&mut cur, &mut zip_file)?;
+                let mut zip = zip::ZipArchive::new(zip_file)?;
+                if let Ok(mut file) = zip.by_name("Dialog/English.txt") {
+                    let mut english = String::new();
+                    file.read_to_string(&mut english)?;
+                    let english = english.replace("=", "= ");
+                    let splits = english.lines()
+                        .filter(|s| !s.strip_prefix("#").is_some())
+                        .map(|s| s.split_whitespace().collect::<Vec<_>>())
+                        .flatten()
+                        .rev()
+                        .collect::<Vec<_>>();
+                    let mut now: Vec<String> = vec![];
+                    for s in splits {
+                        if let Some(key) = s.strip_suffix("=") {
+                            now.reverse();
+                            english_dist.insert(key.to_uppercase().to_string(), now.join(" "));
+                            eprintln!("{} {}", key.to_string(), now.join(" "));
+                            now.clear();
+                        }
+                        else {
+                            now.push(s.to_string());
+                        }
                     }
-                    else {
-                        now.push(s.to_string());
-                    }
-                }
-            };
+                };
+            }
         }
 
         let ans_file = tempfile::NamedTempFile::new().map_err(|e| format!("cant create tempfile {:?}", e))?;
